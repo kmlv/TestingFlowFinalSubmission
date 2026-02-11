@@ -1,0 +1,133 @@
+\section{Notes on Price Pressure and Liquidity}
+
+The natural (il)liquidity metric in the CDA is to choose a quantity, say $Q^*=20$ shares, and to compute the average price gap between the bids and asks resting in the order book up to this value.
+Thus illiquidity at time $t$ is
+\setcounter{equation}{0}
+\begin{equation}\label{eq:Liqcda}
+    L(Q^*,t) = \frac{1}{Q^*}\int_0^{Q^*} A(u,t) - B(u,t) du,
+\end{equation}
+where the ask limit orders resting in the book at time $t$ are sorted in the usual fashion into a non-decreasing piecewise-constant (inverse) supply curve $A(Q,t)$,
+and the resting bids are similarly sorted into $B(Q,t)$, a decreasing step function demand curve. 
+Thus $L(Q^*,t)$ represents the per-share round trip cost (given the current order book) of buying and reselling $Q^*$ shares. 
+It can be thought of as the buying price pressure plus the selling price pressure exerted by $Q^*$ shares.
+In terms of the usual supply and demand diagrams, $L$ is the area of the deadweight loss triangle associated with overtrading by $Q^*$ units, divided by the triangle's (horizontal) height. 
+We define the \textbf{price pressure index}
+$PPI^{CDA}(Q^*)$ as the average of $L(Q^*,t)$ over the given time grid (e.g., the points $t=5, 10, 15, ...., 110, 115$ seconds in a 2 minute trading period).
+
+% The corresponding expression for flow demand (from active CSLO bids) and supply (from active CSLO asks) would be
+% \begin{equation}\label{eq:Liqflowa}
+%     \ell (q^*,t) = \frac{1}{q^*}\int_0^{q^*} a(r+u,t) - b(r+u,t) du,
+% \end{equation}
+% where $a$ and $b$ are the piecewise linear continuous market flow supply and demand curves at a point in time, and $r=r(t)$ is the clearing rate, the solution to $a(q,t) = b(q,t)$. Integrating $b-a$ from 0 to $r$ gives the revealed flow surplus, while $\ell$, the mean value of $a-b$ from $r$ to $r+q^*$, represents the average flow cost of acquiring up to $q^*$ more shares per second plus (separately) selling at those rates. Otherwise put, it is the average instantaneous buying plus selling price pressure exerted over urgencies ranging from $U_{max} = 0$ to $q^*$. It's not quite what we want.
+
+%Clearly, $L$ and $\ell$ in the Flow are not really comparable. The underlying problem is the time dimension. 
+
+A comparable metric for Flow markets must properly incorporate the time dimension. 
+Maintaining the same time grid, we compute the per-share
+round trip cost of buying and selling $Q^*$ units in the Flow market with urgency (i.e., trading speed) $q$ just sufficient to complete the trades in the given time interval (e.g., $\Delta t = 5$ seconds).  
+At any particular grid point $t$, that cost is
+\begin{equation} \label{eq:ppiflow}
+  \ell (Q^*,t) = \frac{1}{Q^*}\int_t^{t+\Delta t} a(r+q,s) - b(r+q,s) ds,
+\end{equation}
+where $a$ and $b$ are flow supply and demand at time $s \in [t, t+\Delta t)$, and 
+$q \equiv \frac{Q^*}{\Delta t}=\frac{20}{5}=4$ 
+suffices to acquire $Q^*$ shares during the time interval. 
+That trading speed $q$ must be added to the current clearing rate $r$ (the rate where $a$ and $b$ intersect) in order to obtain the price pressure associated with \textit{increasing} the cumulative purchase and sale amounts by $Q^*$.
+(Note that the CDA analogue of $r$ is zero, because $A$ and $B$ intersect at $Q=0$ except in the instant when a crossing order is executed.)
+In terms of a flow supply/demand diagram, we can think of $\ell$ as the per-unit deadweight loss rate associated with overtrading by $q$, accumulated over a time interval of length $\Delta t.$ 
+Finally, define 
+$PPI^{Flow}(Q^*)$ as the average of $\ell(Q^*,t)$ over the given time grid.
+
+It may be worth reiterating that our proposed PPI metric takes observed order books as given. Actual increases in buying and/or selling may provoke traders to alter their order streams, which lies beyond the scope of our liquidity analysis.
+
+%we'd also have to specify the urgency --- how soon to we want the orders to be fully filled? 
+% If we insist on a very short time, then we will need a huge $q^*$. Increasing $q^*$ increases the denominator and the length of the integration interval, so those effects should cancel; the main effect will be to increase the average value of the integrand.  
+% On the other hand, if we use a very long time,
+% $q^*>0$ will be tiny and 
+% $\ell$ will be small, since $a-b$ is zero at $r$ and is continuous (piecewise linear increasing).
+% But we would need to accumulate $\ell$ over a long time period during which the $a-b$ function is likely to shift as new orders arrive and active orders expire upon completion.
+
+% To be more specific, let us standardize the accumulated quantity $Q^*$ and compute round-trip per-share trading costs at various speeds $q.$ 
+% By trading at constant rate $q>0$, we accumulate $Q>0$ shares over a time interval of length $T=Q/q$. 
+% Hence $L(Q^*,t)$ is has the same time and quantity dimensions as $\int_t^{t+Q^*/q}\ell(q,s)ds.$
+% However, we need to take the mean with respect to the overall quantity $Q^*$ and do not want to average over rates between 0 and $q.$ 
+% Thus I think an appropriate expression for per share trading cost in a Flow market is
+% \begin{equation}\label{eq:LF}
+%     L^F(q,Q^*,t) = \frac{1}{Q^*}\int_t^{t+Q^*/q} a(q+r,s) - b(q+r,s) ds.
+% \end{equation}
+
+\noindent
+\textbf{Comment.} Since flow supply and demand are piecewise linear, for $q$ small enough that we don't reach any kinks to the right of their intersection, we have 
+$a(q+r,s)-b(q+r,s) = cq$ where  $c=c(s) = a'(r,s) - b'(r,s)>0$
+is the difference in slopes of the marginal line segments.
+Assume for the moment that $c(s)$ is constant over the time interval, i.e., no intermarginal new or expiring orders over the next $\Delta t =Q^*/q$ seconds.
+Then we have
+\begin{equation}\label{eq:LFA}
+\ell (Q^*,t)=  \frac{1}{Q^*}\frac{Q^*}{q}cq = c.  
+\end{equation}
+Thus in this special case our PPI coincides with that of Peter Cramton (personal communication, May 8, 2024), who 
+defines flow liquidity as ``the slope of the aggregate net demand curve at the clearing price,'' i.e., as $c.$
+Of course, for a small $q$ the time interval is long enough that new orders and expirations will likely shift $c=c(s)$, so it should be replaced in (\ref{eq:LFA}) by $\hat{c}$, its time average  over the subsequent 
+$Q^*/q$ seconds.
+For faster acquisition rates $q$ 
+beyond the first kink in the flow supply or demand, 
+we should replace $\hat{c}$ in 
+(\ref{eq:LFA}) by the appropriate weighted average $\Bar{c}$ of the slope difference $a' - b'$
+such that $a(q+r,s) - b(q+r,s) = \Bar{c} q $.
+
+% Let $L^{Flow}(q,Q^*)$ denote that slope difference $\Bar{c}$, averaged over the time grid.
+% Since it represents the average round trip cost that period
+% of buying and selling a standard lot at a chosen rate $q$,
+% it is directly comparable to $L^{CDA}(Q^*)$.
+
+% We might display the latter as a horizontal line in a cost vs q graph, and the former as a curve. It would show the
+% urgencies at which Flow is more liquid than CDA.
+
+% Of course, there is some $q>>0$ such that 
+% $a(q+r,s) \mbox{ or } b(q+r,s)$ is not defined because we have run out of CSLOs. I guess we can say $ b(q+r,s) =0$ and/or $ a(q+r,s) =P_{max}$ in such cases, for some arbitrary $P_{max}>$ every contract price. 
+% But it would be best to stop the q axis well before such cases become frequent.
+
+% To summarize, an appropriate average difference in bid vs ask slopes,
+% $L^{Flow}(q,Q^*) = \Bar{c}(q)$ exists for a range of urgencies $q \in (0, \Bar{q}]$. 
+% For each $q$ it is directly comparable to $L^{CDA}(Q^*)$. 
+% These measures of round-trip costs can be called illiquidity metrics or price pressure metrics. 
+% They can be calculated from order book data sampled at time grid points.
+
+\noindent
+\textbf{Implementation details.} 
+Occasionally the total (flow or stock) demand or supply in order book is less than the standard order size $Q^*.$
+In such cases we supplement the order book with virtual buy orders at boundary limit price 0 and sell orders at boundary limit price $\hat{P} = 20$ well in excess of the highest buy contract price, and complete the calculations using the supplemented book. As noted in the Comment above, the calculation reduces to the difference between flow inverse supply and inverse demand, divided by the trading speed $q$. 
+% \textcolor{red}{What else should we say so that an interested reader could replicate our PPI calculations? Mention $\hat{P}$ value, excluded early or late grid points, ...}
+
+
+
+% Given a sequence of individual flow orders represented by $p = a_i r_i + b_i$, where
+%  $w_i$ is the slope, the slope of the aggregate flow demand/supply is $\left(\sum_{i: p_t \in \left[p^{min}_i, p^{max}_i\right]} \frac{1}{a_i}\right)^{-1}$
+
+% \noindent
+% Suppose we have two line segments
+% \begin{align*}
+%     p = a_1 r + b_1 &\implies r = \frac{p - b_1}{a_1} \\
+%     p = a_2 r + b_2 &\implies r = \frac{p - b_2}{a_2} 
+% \end{align*}
+% Then aggregating them horizontally gives 
+% \begin{align*}
+%     \frac{p - b_1}{a_1} + \frac{p - b_2}{a_2} &= r \\
+%     a_2 (p - b_1) + a_1 (p - b_2) &= a_1 a_2 r \\
+%     p &= \frac{a_1 a_2 r}{a_1 + a_2} + \frac{a_1 b_2 + a_2 b_1}{a_1 + a_2} \\
+%     p &= \frac{1}{\frac{1}{a_1} + \frac{1}{a_2}} r + \frac{a_1 b_2 + a_2 b_1}{a_1 + a_2}
+% \end{align*}
+
+% Generalizing to n line segments, we have for each $p = a_i r_i + b_i$ that $r_i = \frac{p - b_i}{a_i}$. When they are all transacting in the market, the horizontal aggregation becomes 
+% \begin{align*}
+%     r = \sum_i r_i & = \sum_i \frac{p - b_i}{a_i} \\
+%     r \prod_i a_i &= \sum_i ((p - b_i) \prod_{j \neq i} a_j) \\
+%     r \prod_i a_i &= p \sum_i \left(\prod_{j \neq i} a_j \right) - \sum_i \left(b_i \prod_{j \neq i} a_j \right) \\
+%     p &= \frac{\prod_i a_i}{\sum_i \left(\prod_{j \neq i} a_j \right)} r + \frac{\sum_i \left(b_i \prod_{j \neq i} a_j \right)}{\sum_i \left(\prod_{j \neq i} a_j \right)} \\
+%     p &= \frac{1}{\sum_i \frac{1}{a_i}} r + Const.
+% \end{align*}
+
+% Finally we might average over $q \in (0, U_{max})$ and then over the time grid to
+% get a measure $ L^F(Q^*)$ comparable to the CDA measure.
+% It would still have the same form as (\ref{eq:LFA}), but
+% just employ a more averaged $\Bar{c}$.

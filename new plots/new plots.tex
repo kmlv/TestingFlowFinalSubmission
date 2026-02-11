@@ -1,0 +1,516 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{float}
+\usepackage[margin=1in]{geometry}
+\usepackage{color,soul}
+\usepackage{xcolor}
+
+\begin{document}
+
+% Pairs with _r and _s
+\begin{figure}[H]
+  \centering 
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{new plots/groups_flow_contract_r.png}
+    \caption{Contract R}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{new plots/groups_flow_contract_s.png}
+    \caption{Contract S}
+  \end{subfigure}
+  \caption{Groups Flow Contract.
+  \textcolor{red}{occasionally it shows more than 100\% fulfillment. How is that possible?}
+  }
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{new plots/groups_flow_cumsum_r.png}
+    \caption{Cumsum R}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{new plots/groups_flow_cumsum_s.png}
+    \caption{Cumsum S}
+  \end{subfigure}
+  \caption{Groups Flow Cumulative Sum.
+  \textcolor{red}{This is gross trade volume, right?}
+  }
+\end{figure}
+\hl{todo: 1) take percent of CE quantity, 2) avg across each time interval so 120 seconds in total on axis 
+3. Also do it for CDA, and do 3 side by side plots.}
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{new plots/groups_flow_price_r.png}
+    \caption{Price R}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{new plots/groups_flow_price_s.png}
+    \caption{Price S}
+  \end{subfigure}
+  \caption{Groups Flow Price}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{new plots/groups_flow_rate_r.png}
+    \caption{Rate R}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{new plots/groups_flow_rate_s.png}
+    \caption{Rate S}
+  \end{subfigure}
+  \caption{Groups Flow Rate.
+  \textcolor{red}{
+  What does the CE rate mean??
+  Interesting take-away: transaction rate in flow markets are pretty flat within most periods. I think transactions in CDA periods tend to be front-loaded.}
+  }
+\end{figure}
+\hl{todo: cda, use 5-second intervals, plot transaction quantity within each interval to be comparable }
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{new plots/groups_flow_surplus_r.png}
+    \caption{Surplus R}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{new plots/groups_flow_surplus_s.png}
+    \caption{Surplus S}
+  \end{subfigure}
+  \caption{Groups Flow Surplus.
+  }
+\end{figure}
+
+% Standalone new plots
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\textwidth]{new plots/groups_flow_executed_order_volume_cdf_all.png}
+  \caption{Executed Order Volume CDF (All)
+   \textcolor{red}{So on average about half each order is executed? 
+Did a reviewer ask about this?
+If not, relegate to an appendix.}
+  }
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\textwidth]{new plots/groups_flow_max_rate_cdf_all.png}
+  \caption{Max Rate CDF (All).
+\textcolor{red}{OK, there is a take-home point here.
+For R speed limit, sellers and especially buyers use higher Umax in later periods.
+With S speed limit, not as many go for the max U 
+(we already knew that) and the buyers don't much change from earlier periods, but sellers greatly increase Umax in T11-20.}
+  }
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\textwidth]{new plots/groups_flow_max_rate_percent_cdf_all.png}
+  \caption{Max Rate Percent CDF (All).
+  \textcolor{red}{A little redundant. I find it a bit easier to read the previous figure.}
+  }
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\textwidth]{new plots/groups_flow_max_rate_percent_vs_realized_surplus.png}
+  \caption{Max Rate Percent vs. Realized Surplus.
+ \textcolor{red}{Well, that doesn't work...too many colors and shapes for me! I think we will have to do scatters with just 2 or possibly 4 different series.
+ does it make sense to collapse early vs late, or R vs S, or buy vs sell? Probably the latter at least..}
+  }
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\textwidth]{new plots/groups_flow_order_price_diff_cdf_all.png}
+  \caption{Order Price Difference CDF (All).
+  \textcolor{red}{Great! Put this in the appendix but in the text collapse early vs late, which hardly differ. 
+  We do have something close to FOSD (first order stochastic dominance) with pH - pL gaps largest for R-sellers, then R-buyers, then S-buyers and smallest for S-sellers.}}
+\end{figure}
+% 20 percent or less behave similar to CDA
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\textwidth]{new plots/groups_flow_pH-pL_vs_realized_surplus.png}
+  \caption{pH - pL vs. Realized Surplus
+  \textcolor{red}{definitely collapse early vs late
+  so we have fewer cases to sort out. Maybe also buy vs sell?}
+ }
+\end{figure}
+\hl{todo: change realized surplus to excess profit} \\
+\hl{todo: output correlation matrix} \\
+\hl{label: FlowR Buyer T1-T10} \\
+\hl{pH-pL, excess profit, price deviation from contract, max percent percent} \\
+
+
+
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\textwidth]{new plots/groups_flow_price_dev_from_contract_cdf_all.png}
+  \caption{Price Deviation from Contract CDF (All)
+  \textcolor{red}{To respond to R1's question, we can collapse early vs late and R vs S, leaving just 2 cdf's, for buyers and sellers. They won't be very far apart,
+  but that's ok. The main lesson is that very few traders anchor on the contract price; the median profit margin at the cutoff price is between 5 and 10 ECUs, quite large!}
+  }
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\textwidth]{new plots/groups_flow_price_dev_from_contract_vs_excess_profit.png}
+  \caption{Price Deviation from Contract vs. Excess Profit.
+  \textcolor{red}{Again, collapse everything else so we just get 2 colors (and fitted lines), for buyers and sellers.}
+  }
+  
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\textwidth]{new plots/groups_flow_price_dev_from_contract_vs_realized_surplus.png}
+  \caption{Price Deviation from Contract vs. Realized Surplus.
+  \textcolor{red}{Yet again, collapse everything else so we just get 2 colors (and fitted lines), for buyers and sellers.}
+  }
+  \end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\textwidth]{new plots/groups_flow_realized_surplus_cdf_all.png}
+  \caption{Realized Surplus CDF (All)
+  \textcolor{red}{I think this one works ok as is.}
+  }
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+
+
+Correlations 
+\begin{table}[H]
+\centering
+\caption{Pairwise Correlations by Group}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{lrrrrrr}
+\toprule
+ & \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}}Excess Profit \\ vs. Price Deviation\end{tabular}} 
+ & \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}}Excess Profit \\ vs. Max Rate \%\end{tabular}} 
+ & \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}}Excess Profit \\ vs. Price Diff.\end{tabular}} 
+ & \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}}Price Deviation \\ vs. Max Rate \%\end{tabular}} 
+ & \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}}Price Deviation \\ vs. Price Diff.\end{tabular}} 
+ & \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}}Price Diff. \\ vs. Max Rate \%\end{tabular}} \\
+\midrule
+FlowR buy T1--T10   & -0.022 & -0.306 & -0.058 &  0.133 & -0.004 & -0.371 \\
+FlowR buy T11--T20  &  0.141 & -0.195 &  0.119 & -0.108 & -0.024 & -0.333 \\
+FlowR sell T1--T10  &  0.350 & -0.029 &  0.070 &  0.110 & -0.054 &  0.286 \\
+FlowR sell T11--T20 &  0.005 & -0.103 &  0.006 &  0.100 & -0.039 &  0.249 \\
+FlowS buy T1--T10   & -0.036 &  0.083 &  0.170 & -0.104 & -0.160 &  0.238 \\
+FlowS buy T11--T20  & -0.275 &  0.109 &  0.279 & -0.206 & -0.077 &  0.097 \\
+FlowS sell T1--T10  & -0.034 &  0.193 & -0.130 & -0.144 & -0.043 & -0.222 \\
+FlowS sell T11--T20 &  0.094 & -0.066 &  0.173 & -0.126 &  0.237 & -0.213 \\
+\bottomrule
+\end{tabular}
+}
+\end{table}
+\textbf{DF comments.} Might be better to use Spearman rank correlation rather than Pearson,
+since Spearman is more robust to outliers. But let it go. 
+I wouldn't take seriously correlations in T1-10 that disappear in T11-20.
+Takeaways: \\
+Column 1: The data do not seem to support R1's conjecture that Flow traders anchor on contract price. In the text we saw that usually they want a profit margin of 5-10 ECU even at the distant end of the price range. Here we see that for FlowS buyers larger deviations are more profitable, and elsewhere correlations are close to zero on avg.\\
+Col 2: There is little evidence that it is profitable to push U to near the speed limit. For FlowR buyers (and possibly sellers), it seems deleterious;  possibly helpful for FlowS buyers, but elsewhere we see no consistent connection. \\
+Col 3: wider spreads (pH-pL, aka price diff.) seem profitable for FlowS buyers and (in T11-20) perhaps for FlowS sellers and FlowR buyers.
+This again suggests that highly aggressive orders aren't generally profitable in Flow markets. \\
+col 4: see comments re next two columns. \\
+col 5: price deviations and price differences are very highly correlated.
+Could that mean that we defined deviations backwards?
+For sellers, the deviation should be pL - pC, and it should be pC - pH for buyers, right?? 
+col 6: FlowR buyers and FlowS sellers tend to be aggressive or passive on both (U and pH-pL) dimensions together, while FlowR sellers and FlowS buyers tend to offset aggression on one dimension by passivity on the other. 
+\hl{YL: fixed the ones with prive deviation from contract as it was opposite for buyers and sellers}
+
+\bigskip
+
+With added order comparison of the whole 120s with the first 20s (labelled as early)\\
+
+\textbf{DF comments.}\\
+The main thing I see is that early orders tend to be larger. 
+Not surprising, since many later orders are to fill small remaining portions of the contract.\\
+Didn't we have an order size limit of 200 shares? This seems to be exceeded in early Flow markets.
+
+\hl{YL: Flow does not have order limitation of 200 shares as it is entered in a text box instead of dragging in the plot, it is only bounded by the contract quantity}
+
+
+\begin{table}[H]
+    \centering
+\begin{tabular}{lllllll}
+\hline
+ None                     & CDA      & FlowR         & FlowS         & CDA       & FlowR         & FlowS         \\
+\hline
+                          & T1 - T20 & T1 - T20      & T1 - T20      & T11 - T20 & T11 - T20     & T11 - T20     \\
+ Number of Orders         & 31.65    & 23.81         & 25.94         & 31.86     & 23.04         & 24.82         \\
+ Seller                   & 16.86    & 12.07         & 12.71         & 17.1      & 11.36         & 12.32         \\
+ Buyer                    & 14.79    & 11.74         & 13.23         & 14.76     & 11.68         & 12.5          \\
+ Quant. per Order         & 114.39   & 186.24        & 192.08        & 111.88    & 188.44        & 194.87        \\
+ Seller                   & 114.51   & 184.89        & 190.69        & 111.2     & 185.46        & 196.69        \\
+ Buyer                    & 114.27   & 187.59        & 193.47        & 112.56    & 191.42        & 193.06        \\
+ Quant. per Order (early) & 150.49   & 246.17        & 259.3         & 148.23    & 259.27        & 263.06        \\
+ Seller                   & 149.71   & 251.61        & 267.33        & 143.16    & 262.58        & 271.89        \\
+ Buyer                    & 152.03   & 240.72        & 250.94        & 153.3     & 255.97        & 253.67        \\
+ Order Price              & 8.8      & [6.72, 12.59] & [6.91, 11.79] & 8.53      & [6.42, 12.3]  & [6.95, 11.68] \\
+ Seller                   & 10.7     & [9.21, 15.46] & [9.43, 14.08] & 10.27     & [8.66, 14.88] & [9.29, 13.57] \\
+ Buyer                    & 6.9      & [4.22, 9.71]  & [4.39, 9.49]  & 6.79      & [4.19, 9.71]  & [4.62, 9.79]  \\
+ Order Price (early)      & 8.98     & [6.63, 12.96] & [6.67, 11.99] & 8.62      & [6.45, 12.7]  & [6.65, 11.66] \\
+ Seller                   & 10.77    & [8.49, 15.62] & [8.59, 13.77] & 10.51     & [8.1, 15.04]  & [8.49, 13.21] \\
+ Buyer                    & 7.21     & [4.78, 10.31] & [4.81, 10.28] & 6.73      & [4.8, 10.36]  & [4.94, 10.24] \\
+ Order Max Rate           &          & 19.91         & 34.11         &           & 21.83         & 36.83         \\
+ Seller                   &          & 19.67         & 35.82         &           & 21.29         & 39.3          \\
+ Buyer                    &          & 20.15         & 32.4          &           & 22.37         & 34.36         \\
+ Order Max Rate (early)   &          & 21.14         & 37.83         &           & 22.65         & 39.34         \\
+ Seller                   &          & 21.02         & 38.4          &           & 21.77         & 42.16         \\
+ Buyer                    &          & 21.27         & 37.07         &           & 23.53         & 36.24         \\
+ \%Order at Max Quantity   & 0.26     &               &               & 0.26      &               &               \\
+ Seller                   & 0.25     &               &               & 0.25      &               &               \\
+ Buyer                    & 0.27     &               &               & 0.26      &               &               \\
+ \%Order at Max Rate       &          & 0.38          & 0.22          &           & 0.48          & 0.29          \\
+ Seller                   &          & 0.38          & 0.23          &           & 0.46          & 0.3           \\
+ Buyer                    &          & 0.39          & 0.21          &           & 0.49          & 0.27          \\
+\hline
+\end{tabular}
+    \caption{Caption}
+    \label{tab:my_label}
+\end{table}
+
+
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{new plots/group_gross_profits_cdf.png}
+        \caption{T1-T20}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{new plots/group_gross_profits_last_cdf.png}
+        \caption{T11-T20}
+    \end{subfigure}
+    \caption{Gross / CE Profits}
+    \label{fig:enter-label}
+\end{figure}
+\textbf{DF comment:} This could go in the text in the explanation of Result 6, or the text could point to its position in Appendix B. \\
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{new plots/executed_order_volume_percent_cdf.png}
+        \caption{T1-T20}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{new plots/executed_order_volume_percent_last_cdf.png}
+        \caption{T11-T20}
+    \end{subfigure}
+    \caption{\%Executed Order Volume. 
+    The takeaway: more than 60\% of CDA orders are not executed at all, vs 25-35\% of Flow orders. most not fully executed }
+    \label{fig:enter-label}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[t]{0.32\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{new plots/groups_cda_contract.png}
+        \caption{CDA}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[t]{0.32\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{new plots/groups_flow_contract_r.png}
+        \caption{FlowR}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[t]{0.32\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{new plots/groups_flow_contract_s.png}
+        \caption{FlowS}
+    \end{subfigure}
+    \caption{Filled Contract. We need somewhere to define filled contract, since occasionally we get fills above 1.0. \hl{right, we only consider infra-marginal quantity}}
+    \label{fig:enter-label}
+\end{figure}
+
+
+below is the new figure with cumulative quantity averaged across each timestamp.\\
+\textbf{DF comment.} These should be 3 curves in a single graph.
+The lesson is that CDA is more front-loaded. FlowS seems to pretty much catch up to CDA in the second half of the period. This and later figures (showing shares/sec) confirm that transaction rates are pretty steady in Flow, but noisily trend downward in CDA.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\linewidth]{new plots/groups_cumsum_compress_all.png}
+    \caption{Caption}
+    \label{fig:enter-label}
+\end{figure}
+
+
+
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[t]{0.32\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{new plots/groups_cda_cumsum_compress.png}
+        \caption{CDA}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[t]{0.32\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{new plots/groups_flow_cumsum_r_compress.png}
+        \caption{FlowR}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[t]{0.32\textwidth}    
+        \centering
+        \includegraphics[width=\linewidth]{new plots/groups_flow_cumsum_s_compress.png}
+        \caption{FlowS}
+    \end{subfigure}
+    \caption{Cumulative Volume}
+    \label{fig:enter-label}
+\end{figure}
+
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[t]{\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{new plots/groups_cda_price.png}
+        \caption{CDA}
+    \end{subfigure}
+    \begin{subfigure}[t]{\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{new plots/groups_flow_price_r.png}
+        \caption{FlowR}
+    \end{subfigure}
+    \begin{subfigure}[t]{\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{new plots/groups_flow_price_s.png}
+        \caption{FlowS}
+    \end{subfigure}
+    \caption{Price}
+    \label{fig:enter-label}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[t]{\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{new plots/groups_cda_rate.png}
+        \caption{CDA}
+    \end{subfigure}
+    \begin{subfigure}[t]{\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{new plots/groups_flow_rate_r.png}
+        \caption{FlowR}
+    \end{subfigure}
+    \begin{subfigure}[t]{\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{new plots/groups_flow_rate_s.png}
+        \caption{FlowS}
+    \end{subfigure}
+    \caption{Rate}
+    \label{fig:enter-label}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[t]{\textwidth}
+        \centering
+        \includegraphics[width=.5\linewidth]{new plots/groups_cda_surplus.png}
+        \caption{CDA}
+    \end{subfigure}
+    \begin{subfigure}[t]{\textwidth}
+        \centering
+        \includegraphics[width=.5\linewidth]{new plots/groups_flow_surplus_r.png}
+        \caption{FlowR}
+    \end{subfigure}
+    \begin{subfigure}[t]{\textwidth}
+        \centering
+        \includegraphics[width=.5\linewidth]{new plots/groups_flow_surplus_s.png}
+        \caption{FlowS}
+    \end{subfigure}
+    \caption{Rate}
+    \label{fig:enter-label}
+\end{figure}
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.6\linewidth]{new plots/groups_flow_executed_order_volume_cdf_all.png}
+    \caption{\%Executed order volume}
+    \label{fig:enter-label}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\linewidth]{new plots/groups_flow_max_rate_cdf_all.png}
+    \caption{Flow Order Max Rate}
+    \label{fig:enter-label}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{new plots/groups_flow_pH-pL_vs_excess_profit.png}
+    \caption{pH-pL vs excess profit}
+    \label{fig:enter-label}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{new plots/groups_flow_max_rate_percent_vs_excess_profit.png}
+    \caption{\%order max rate vs excess profit}
+    \label{fig:enter-label}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{new plots/groups_flow_price_dev_from_contract_vs_excess_profit.png}
+    \caption{price deviation from contract vs excess profit}
+    \label{fig:enter-label}
+\end{figure}
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\linewidth]{new plots/groups_flow_order_price_diff_cdf_all.png}
+    \caption{pH-pL. \textbf{DF comment.} Odd. FlowS sellers are most aggressive (narrowest pH-pL) while FlowR sellers are least aggressive, with buyers in between, not differing much by .R vs .S or early vs late periods. 
+    }
+    \label{fig:enter-label}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\linewidth]{new plots/groups_flow_max_rate_cdf_all.png}
+    \caption{order max rate}
+    \label{fig:enter-label}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\linewidth]{new plots/groups_flow_max_rate_percent_cdf_all.png}
+    \caption{order max rate}
+    \label{fig:enter-label}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\linewidth]{new plots/groups_flow_price_dev_from_contract_cdf_all.png}
+    \caption{price deviation from contract}
+    \label{fig:enter-label}
+\end{figure}
+\textbf{DF comments.} Why would anyone ever want a deviation more than 10 on a range of 20? 
+And is it even possible to have a deviation of more than 15?
+
+\hl{YL: we have pH - pC for natural Buyers and pC - pL for natural Sellers, there are not many data points with positive deviations and it is possible to have very large values as contract prices could be close to 0 and 20}
+\end{document}

@@ -1,0 +1,758 @@
+\newpage
+\section{Supplemental Data Analysis} \label{app_supp_data}
+
+\begin{figure}[!h] 
+    \centering
+    \begin{subfigure}[b]{\linewidth}
+        \centering
+        % \begin{adjustbox}{trim=0 {.02\height} 0 {.12\height}, clip=true}
+        \begin{adjustbox}{trim=0 {.02\height} {.10\width} {.11\height},clip=true}
+            \includegraphics[width=1\linewidth]{plots_app (Nov 25)/groups_cda_price.png}
+        \end{adjustbox}
+        \subcaption{CDA}
+    \end{subfigure}
+    \begin{subfigure}[b]{\linewidth}
+        \centering
+        \begin{adjustbox}{trim=0 {.02\height} {.10\width} {.11\height},clip=true}
+            \includegraphics[width=1\linewidth]{plots_app (Nov 25)/groups_flow30_price.png}
+        \end{adjustbox}
+        \subcaption{Flow30}
+    \end{subfigure} 
+    \begin{subfigure}[b]{\linewidth}
+        \centering
+        \begin{adjustbox}{trim=0 {.02\height} {.10\width} {.11\height},clip=true}
+            \includegraphics[width=1\linewidth]{plots_app (Nov 25)/groups_flow60_price.png}
+        \end{adjustbox}
+        \subcaption{Flow60}
+    \end{subfigure} 
+\caption{\textbf{Transaction prices over time.} \footnotesize Faint colored lines (for Flow markets in Panels (b-c)) or dots (for CDA markets in Panel (a)) indicate prices in each individual session, and dark green lines or dots are averages across the 5 sessions in each format. The purple line represents the underlying competitive equilibrium price for each block of periods. Vertical dotted lines separate the 20 paid periods.
+% \textcolor{red}{the block and period numbers are too faint to see easily..} 
+}    
+    \label{fig:price}
+\end{figure}
+
+\newpage
+
+\begin{figure}[!h]
+    \centering
+    \captionsetup[subfigure]{justification=centering}
+    %======================  Row 1 :  CDA  ======================%
+    \begin{subfigure}[b]{.48\linewidth}
+        \centering
+        \begin{adjustbox}{trim=0 {.02\height} {.05\width} {.11\height},clip,max width=\linewidth}
+            \includegraphics{plots_app (Nov 25)/groups_cda_quantity.png}
+        \end{adjustbox}
+        \subcaption{CDA — Traded Volume}
+        \label{fig:cda_volume}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{.48\linewidth}
+        \centering
+        \begin{adjustbox}{trim=0 {.02\height} {.05\width} {.11\height},clip,max width=\linewidth}
+            \includegraphics{plots_app (Nov 25)/groups_cda_surplus.png}
+        \end{adjustbox}
+        \subcaption{CDA — Surplus}
+        \label{fig:cda_surplus}
+    \end{subfigure}
+    \par\medskip
+    %======================  Row 2 :  Flow30  =====================%
+    \begin{subfigure}[b]{.48\linewidth}
+        \centering
+        \begin{adjustbox}{trim=0 {.02\height} {.05\width} {.11\height},clip,max width=\linewidth}
+            \includegraphics{plots_app (Nov 25)/groups_flow30_quantity.png}
+        \end{adjustbox}
+        \subcaption{Flow30 — Traded Volume}
+        \label{fig:Flow30_volume}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{.48\linewidth}
+        \centering
+        \begin{adjustbox}{trim=0 {.02\height} {.05\width} {.11\height},clip,max width=\linewidth}
+            \includegraphics{plots_app (Nov 25)/groups_flow30_surplus.png}
+        \end{adjustbox}
+        \subcaption{Flow30 — Surplus}
+        \label{fig:Flow30_surplus}
+    \end{subfigure}
+    \par\medskip
+    %======================  Row 3 :  Flow60  =====================%
+    \begin{subfigure}[b]{.48\linewidth}
+        \centering
+        \begin{adjustbox}{trim=0 {.02\height} {.05\width} {.11\height},clip,max width=\linewidth}
+            \includegraphics{plots_app (Nov 25)/groups_flow60_quantity.png}
+        \end{adjustbox}
+        \subcaption{Flow60 — Traded Volume}
+        \label{fig:Flow60_volume}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{.48\linewidth}
+        \centering
+        \begin{adjustbox}{trim=0 {.02\height} {.05\width} {.11\height},clip,max width=\linewidth}
+            \includegraphics{plots_app (Nov 25)/groups_flow60_surplus.png}
+        \end{adjustbox}
+        \subcaption{Flow60 — Surplus}
+        \label{fig:Flow60_surplus}
+    \end{subfigure}
+    %--------------------  Caption  ------------------------------%
+    \caption{\textbf{Trade volume and realized surplus.} \footnotesize   Faint colored lines show observed volume (in shares) and realized surplus (as \% of the CE surplus) for each of the 20 periods of each session; dark green lines show averages across sessions; and the pink step function shows the competitive‐equilibrium (CE) volume (or normalized surplus, for the horizontal pink line) in each block. Analogous plots for filled contracts appear in  Appendix Figure~\ref{fig:contract-fill}. 
+    }
+    \label{fig:volume_surplus_grid}
+\end{figure}
+
+\newpage
+
+\begin{figure}
+    \centering
+    \begin{adjustbox}{trim=0 0 0 {0.0\height}, clip=true}
+        \includegraphics[width=\linewidth]{plots_app (Nov 25)/group_gross_profits_last_cdf.png}
+    \end{adjustbox}
+    \caption{\textbf{Profit distribution.} \footnotesize This figure shows the period-level distribution of profits for the second half of the session.}
+    \label{fig:norm_profits_last}
+\end{figure}
+
+\newpage
+
+\begin{figure}[!h]
+    \centering
+    \begin{adjustbox}{trim=0 0 0 {0.0\height},clip=true}
+        \includegraphics[width=.75\linewidth]{plots_app (Nov 25)/groups_flow_max_rate_cdf_all.png}
+    \end{adjustbox}
+\caption{\textbf{Cumulative distribution of $U_{\max}$.} \footnotesize  
+Distributions for Flow30
+($U_{\max} \leq 30$ sh/s) and Flow60 ($U_{\max} \leq 60$ sh/s)
+are shown separately for buyers (green) and sellers (purple) and for early (solid or dash) and late (dots or dash-dots) periods.}
+    \label{fig:u-cdf}
+\end{figure}
+
+\newpage
+
+
+\subsection{Robustness Check using 10-second intervals}
+\begin{table}[H]
+    \centering
+    \caption{Summary Statistics: Market Performance}
+    \renewcommand{\arraystretch}{1.1}
+    \resizebox{\textwidth}{!}{
+    \begin{threeparttable}
+    \begin{tabular}{lcccccc}
+    
+    \toprule
+    
+    ~ & \multicolumn{3}{c}{T1 - T20} & \multicolumn{3}{c}{T11 - T20} \\
+                                    & CDA       & Flow30      & Flow60      & CDA       & Flow30     & Flow60     \\
+    \midrule 
+     \\[-1.8ex] 
+    \multicolumn{7}{l}{\textit{\textbf{(a)} Price Statistics} (Avg. Equil Price = $9.8$ ECUs)} \\
+    % \hline 
+     \\[-1.8ex]    
+     Clearing Prices ($P_{\tau}$, ECUs)              & 8.64     & 9.38     & 9.42     & 8.23     & 9.18     & 9.27           \\
+     \hspace{3mm}(Std. Dev.)                    & (2.7)    & (2.5)    & (2.09)   & (2.47)   & (2.26)   & (1.96)         \\
+     $ \lvert  P_{\tau}-P_{\tau - 1} \rvert $         & 0.85     & 0.51     & 0.57     & 0.81     & 0.48     & 0.58          \\
+     Std. Dev. of $(\ln P_{\tau} - \ln P_{\tau - 1})$ & 0.17     & 0.08     & 0.1      & 0.15     & 0.08     & 0.1            \\     
+     PPI       & 3.54     & 1.11     & 1.05     & 3.5      & 0.9      & 0.87            \\
+     \multicolumn{7}{l}{\textit{\textbf{(c)} Efficiency and Buyer-Seller Inequality}} \\
+     \\ [-1.8ex]
+     Info. Effic.: $\lvert P_\tau - P_{\text{CE}} \rvert $        & 2.14     & 2.07     & 2.18     & 2.08     & 1.84     & 2.13          \\    
+     \\[-1.8ex] 
+    \bottomrule 
+    \end{tabular}
+    % \begin{tablenotes}[para,flushleft]
+    % \footnotesize
+    % \textit{Note:} 
+    % \end{tablenotes}
+    \end{threeparttable}}
+\end{table}
+
+\begin{table}[H]
+\centering    
+\caption{Regression: Price Volatility}
+\resizebox{\textwidth}{!}{
+\begin{threeparttable}
+\begin{tabular}{@{\extracolsep{5pt}}lcccccc}
+\toprule
+& \multicolumn{2}{c}{$\lvert P_{\tau} - P_{\tau - 1}\rvert$} & \multicolumn{2}{c}{SD$\left(\ln P_{\tau} - \ln P_{\tau - 1}\right)$} & \multicolumn{2}{c}{$PPI_{\tau}$} \\
+\cmidrule{2-7}
+& T1-T20 & T11-T20 & T1-T20 & T11-T20 & T1-T20 & T11-T20 \\
+& (1) & (2) & (3) & (4) & (5) & (6) \\
+\midrule
+ Intercept & 2.292$^{***}$ & 2.595$^{***}$ & 0.388$^{***}$ & 0.450$^{***}$ & 8.243$^{***}$ & 9.203$^{***}$ \\
+& (0.335) & (0.542) & (0.063) & (0.102) & (0.784) & (1.158) \\
+ Flow30 & -0.695$^{***}$ & -0.627$^{***}$ & -0.085$^{***}$ & -0.076$^{***}$ & -2.427$^{***}$ & -2.606$^{***}$ \\
+& (0.066) & (0.087) & (0.011) & (0.015) & (0.114) & (0.159) \\
+ Flow60 & -0.636$^{***}$ & -0.552$^{***}$ & -0.067$^{***}$ & -0.057$^{***}$ & -2.488$^{***}$ & -2.634$^{***}$ \\
+& (0.068) & (0.093) & (0.012) & (0.016) & (0.114) & (0.159) \\
+ Period number & -0.057$^{***}$ & -0.076$^{***}$ & -0.012$^{***}$ & -0.015$^{***}$ & -0.209$^{***}$ & -0.268$^{***}$ \\
+& (0.016) & (0.027) & (0.003) & (0.005) & (0.040) & (0.059) \\
+ Interval number & 0.018$^{***}$ & 0.017$^{**}$ & & & -0.109$^{***}$ & -0.072$^{***}$ \\
+& (0.006) & (0.008) & & & (0.013) & (0.018) \\
+\midrule
+ Observations & 3300 & 1650 & 300 & 150 & 3600 & 1800 \\
+ Adjusted $R^2$ & 0.119 & 0.113 & 0.271 & 0.252 & 0.226 & 0.248 \\
+\midrule
+CDA avg. & 0.85 & 0.81 & 0.17 & 0.15 & 3.54 & 3.5 \\
+\bottomrule
+\end{tabular}
+\end{threeparttable}}
+\end{table}
+
+\begin{table}[H]
+\centering    
+\caption{Regression: Efficiency and Buyer-Seller Disparity}
+\resizebox{\textwidth}{!}{
+\begin{threeparttable}
+\begin{tabular}{@{\extracolsep{5pt}}lcccccc}
+\toprule
+& \multicolumn{2}{c}{$\lvert P_\tau - P_{\text{CE}}\rvert$} & \multicolumn{2}{c}{Realized Surplus (\%)} & \multicolumn{2}{c}{Buyer-Seller Disparity} \\
+\cmidrule{2-7}
+& T1-T20 & T11-T20 & T1-T20 & T11-T20 & T1-T20 & T11-T20 \\
+& (1) & (2) & (3) & (4) & (5) & (6) \\
+\midrule
+ Intercept & 8.571$^{***}$ & 8.871$^{***}$ & 0.537$^{***}$ & 0.666$^{***}$ & 10506.774$^{***}$ & 14420.906$^{***}$ \\
+& (0.655) & (1.023) & (0.039) & (0.048) & (1041.050) & (1501.856) \\
+ Flow30 & 0.022$^{}$ & 0.013$^{}$ & -0.025$^{***}$ & -0.025$^{***}$ & -1607.811$^{***}$ & -2082.046$^{***}$ \\
+& (0.104) & (0.134) & (0.006) & (0.007) & (161.163) & (207.071) \\
+ Flow60 & 0.186$^{*}$ & 0.273$^{**}$ & 0.057$^{***}$ & 0.047$^{***}$ & -1613.308$^{***}$ & -2297.966$^{***}$ \\
+& (0.100) & (0.138) & (0.005) & (0.006) & (148.599) & (188.476) \\
+ Period number & -0.252$^{***}$ & -0.265$^{***}$ & 0.019$^{***}$ & 0.012$^{***}$ & -90.099$^{}$ & -280.793$^{***}$ \\
+& (0.035) & (0.055) & (0.002) & (0.002) & (56.335) & (82.415) \\
+ Interval number & -0.094$^{***}$ & -0.110$^{***}$ & & & & \\
+& (0.012) & (0.016) & & & & \\
+\midrule
+ Observations & 3600 & 1800 & 3000 & 1500 & 3000 & 1500 \\
+ Adjusted $R^2$ & 0.385 & 0.497 & 0.377 & 0.218 & 0.804 & 0.833 \\
+\midrule
+CDA avg. & 2.14 & 2.08 & 0.843 & 0.889 & 2537 & 3417 \\
+\bottomrule
+\end{tabular}
+\end{threeparttable}
+}
+\end{table}
+
+
+\subsection{Robustness check using 2-second intervals}
+\begin{table}[H]
+    \centering
+    \caption{Summary Statistics: Market Performance}
+    \renewcommand{\arraystretch}{1.1}
+    \resizebox{\textwidth}{!}{
+    \begin{threeparttable}
+    \begin{tabular}{lcccccc}
+    
+    \toprule
+    
+    ~                               & \multicolumn{3}{c}{T1 - T20} & \multicolumn{3}{c}{T11 - T20} \\
+                                    & CDA       & Flow30      & Flow60      & CDA       & Flow30     & Flow60     \\
+    \midrule 
+     \\[-1.8ex] 
+     \multicolumn{7}{l}{\textit{\textbf{(a)} Price Statistics} (Avg. Equil Price = $9.8$ ECUs)} \\
+    % \hline 
+     \\[-1.8ex]    
+     Clearing Prices ($P_\tau$, ECUs)              & 8.65     & 9.38     & 9.57     & 8.23     & 9.2      & 9.4           \\
+     \hspace{3mm}(Std. Dev.)                    & (2.81)   & (2.58)   & (2.29)   & (2.54)   & (2.35)   & (2.08)        \\
+     $ \lvert P_{\tau} - P_{\tau - 1} \rvert $        & 0.27     & 0.22     & 0.25     & 0.26     & 0.22     & 0.24           \\
+     Std. Dev. of $(\ln P_{\tau} - \ln P_{\tau - 1})$ & 0.1      & 0.06     & 0.07     & 0.09     & 0.06     & 0.07           \\
+     PPI       & 4.2      & 0.62     & 0.48     & 4.13     & 0.55     & 0.42          \\
+     \multicolumn{7}{l}{\textit{\textbf{(c)} Efficiency and Buyer-Seller Inequality}} \\
+     \\ [-1.8ex]
+     Info. Effic.: $\lvert P_\tau - P_{\text{CE}} \rvert $        & 2.17     & 2.07     & 2.18     & 2.13     & 1.82     & 2.13           \\
+    \bottomrule 
+    \end{tabular}
+    % \begin{tablenotes}[para,flushleft]
+    % \footnotesize
+    % \textit{Note:} 
+    % \end{tablenotes}
+    \end{threeparttable}
+   }
+\end{table}
+
+\begin{table}[H]
+\centering    
+\caption{Regression: Price Volatility}
+\resizebox{\textwidth}{!}{
+\begin{threeparttable}
+\begin{tabular}{@{\extracolsep{5pt}}lcccccc}
+\toprule
+& \multicolumn{2}{c}{$\lvert P_{\tau} - P_{\tau - 1}\rvert$} & \multicolumn{2}{c}{SD$\left(\ln P_{\tau} - \ln P_{\tau - 1}\right)$} & \multicolumn{2}{c}{$PPI_{\tau}$} \\
+\cmidrule{2-7}
+& T1-T20 & T11-T20 & T1-T20 & T11-T20 & T1-T20 & T11-T20 \\
+ & (1) & (2) & (3) & (4) & (5) & (6) \\
+\midrule
+ Intercept & 2.293$^{***}$ & 2.565$^{***}$ & 0.220$^{***}$ & 0.264$^{***}$ & 8.025$^{***}$ & 8.805$^{***}$ \\
+& (0.297) & (0.408) & (0.046) & (0.069) & (0.444) & (0.661) \\
+ Flow30 & -0.991$^{***}$ & -0.817$^{***}$ & -0.046$^{***}$ & -0.038$^{***}$ & -3.579$^{***}$ & -3.580$^{***}$ \\
+& (0.060) & (0.072) & (0.007) & (0.010) & (0.073) & (0.101) \\
+ Flow60 & -0.904$^{***}$ & -0.718$^{***}$ & -0.033$^{***}$ & -0.027$^{***}$ & -3.725$^{***}$ & -3.702$^{***}$ \\
+& (0.062) & (0.075) & (0.008) & (0.010) & (0.073) & (0.101) \\
+ Period number & -0.049$^{***}$ & -0.073$^{***}$ & -0.006$^{**}$ & -0.009$^{**}$ & -0.145$^{***}$ & -0.198$^{***}$ \\
+& (0.014) & (0.019) & (0.002) & (0.004) & (0.023) & (0.034) \\
+ Interval number & -0.001$^{}$ & -0.000$^{}$ & & & -0.032$^{***}$ & -0.026$^{***}$ \\
+& (0.001) & (0.001) & & & (0.002) & (0.003) \\
+\midrule
+ Observations & 17700 & 8850 & 300 & 150 & 18000 & 9000 \\
+ Adjusted $R^2$ & 0.155 & 0.131 & 0.181 & 0.164 & 0.335 & 0.334 \\
+\midrule
+CDA avg. & 0.27 & 0.26 & 0.1 & 0.09 & 4.2 & 4.13 \\
+Flow30 = Flow60 ? & 0.000 & 0.000 & 0.036 & 0.209 & 0.000 & 0.000 \\
+\bottomrule
+\end{tabular}
+\end{threeparttable}}
+\end{table}
+
+
+\begin{table}[H]
+\centering    
+\caption{Regression: Efficiency and Buyer-Seller Disparity}
+\resizebox{\textwidth}{!}{
+\begin{threeparttable}
+\begin{tabular}{@{\extracolsep{5pt}}lcccccc}
+\toprule
+& \multicolumn{2}{c}{$\lvert P_\tau - P_{\text{CE}}\rvert$} & \multicolumn{2}{c}{Realized Surplus (\%)} & \multicolumn{2}{c}{Buyer-Seller Disparity} \\
+\cmidrule{2-7}
+& T1-T20 & T11-T20 & T1-T20 & T11-T20 & T1-T20 & T11-T20 \\
+& (1) & (2) & (3) & (4) & (5) & (6) \\
+\midrule
+ Intercept & 8.654$^{***}$ & 8.976$^{***}$ & 0.537$^{***}$ & 0.666$^{***}$ & 10506.774$^{***}$ & 14420.906$^{***}$ \\
+& (0.403) & (0.610) & (0.039) & (0.048) & (1041.050) & (1501.856) \\
+ Flow30 & -0.018$^{}$ & -0.030$^{}$ & -0.025$^{***}$ & -0.025$^{***}$ & -1607.811$^{***}$ & -2082.046$^{***}$ \\
+& (0.073) & (0.093) & (0.006) & (0.007) & (161.163) & (207.071) \\
+ Flow60 & 0.150$^{**}$ & 0.246$^{**}$ & 0.057$^{***}$ & 0.047$^{***}$ & -1613.308$^{***}$ & -2297.966$^{***}$ \\
+& (0.073) & (0.096) & (0.005) & (0.006) & (148.599) & (188.476) \\
+ Period number & -0.255$^{***}$ & -0.271$^{***}$ & 0.019$^{***}$ & 0.012$^{***}$ & -90.099$^{}$ & -280.793$^{***}$ \\
+& (0.021) & (0.032) & (0.002) & (0.002) & (56.335) & (82.415) \\
+ Interval number & -0.019$^{***}$ & -0.022$^{***}$ & & & & \\
+& (0.002) & (0.002) & & & & \\
+\midrule
+ Observations & 18000 & 9000 & 3000 & 1500 & 3000 & 1500 \\
+ Adjusted $R^2$ & 0.359 & 0.466 & 0.377 & 0.218 & 0.804 & 0.833 \\
+\midrule
+CDA avg. & 2.17 & 2.13 & 0.14 & 0.13 & 3.98 & 3.88 \\
+Flow30 = Flow60 ? & 0.000 & 0.000 & 0.000 & 0.000 & 0.973 & 0.308 \\
+\bottomrule
+\end{tabular}
+\end{threeparttable}
+}
+\end{table}
+
+
+% \subsection{Regressions with interaction terms}\label{App:RegInteract}
+% \begin{table}[H] \centering
+% \resizebox{\textwidth}{!}{
+% \begin{tabular}{@{\extracolsep{5pt}}lcccccc}
+% \toprule
+% \\[-1.8ex] & Num. of Orders & Order Size & Traded Volume & Filled Cont. Q / $Q_{CE}$ & Realized Surplus (\%) & Buyer-Seller Disparity \\
+% \midrule
+%  Intercept & 35.3$^{***}$ & 145.9$^{***}$ & 811$^{***}$ & 0.675$^{***}$ & 0.527$^{***}$ & 9922$^{***}$ \\
+%   & (5.4) & (26.7) & (210) & (0.155) & (0.132) & (3072) \\
+%  Flow Format (=1) & -6.1$^{***}$ & 65$^{***}$ & -307$^{***}$ & -0.163$^{***}$ & -0.036$^{}$ & -799$^{}$ \\
+%   & (1.9) & (7.2) & (58) & (0.054) & (0.042) & (1068) \\
+%  Flow Format $\times$ Period Num. & -0.2$^{}$ & 0.6$^{}$ & 12$^{***}$ & 0.008$^{**}$ & 0.001$^{}$ & -77$^{}$ \\
+%   & (0.1) & (0.6) & (4) & (0.004) & (0.003) & (85) \\
+%  Period number & -0.2$^{}$ & -1.9$^{}$ & 13$^{}$ & 0.012$^{}$ & 0.019$^{***}$ & -53$^{}$ \\
+%   & (0.3) & (1.4) & (11) & (0.008) & (0.007) & (171) \\
+% \midrule
+%  Observations & 200 & 200 & 200 & 200 & 200 & 200 \\
+%  Adjusted $R^2$ & 0.409 & 0.719 & 0.477 & 0.285 & 0.288 & 0.780 \\
+% \bottomrule
+% \textit{Note:} & \multicolumn{6}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\
+% \end{tabular}}
+% \end{table}
+
+
+\subsection{Summary statistics with unweighted prices}
+\begin{table}[H]
+    \centering
+    \caption{Summary Statistics of Experimental Sessions}
+    % \renewcommand{\arraystretch}{1.25}
+    % \resizebox{\textwidth}{!}{
+    \begin{threeparttable}        
+    \begin{tabular}{cccccccccc}
+    \toprule
+     & \multicolumn{3}{c}{T1 - T20} & \multicolumn{3}{c}{T1 - T10}  & \multicolumn{3}{c}{T11 - T20}  \\
+     & CDA          & Flow30          & Flow60          & CDA           & Flow30          & Flow60          & CDA        & Flow30          & Flow60           \\
+    \midrule
+    Average price & 8.59 & 9.43 & 9.71 & 8.97 & 9.59 & 9.88 & 8.21 & 9.26 & 9.53 \\
+    $\mid P_t - P_{CE} \mid$ & -1.21 & -0.37 & -0.09 & -0.83 & -0.21 & 0.08 & -1.59 & -0.54 & -0.27 \\
+    $\mid P_{t} - P_{t - 1} \mid$ & 0.14 & 0.15 & 0.17 & 0.14 & 0.15 & 0.19 & 0.14 & 0.15 & 0.16 \\
+    Std($P_{t} - P_{t - 1}$) & 0.08 & 0.05 & 0.06 & 0.08 & 0.05 & 0.07 & 0.07 & 0.05 & 0.06 \\
+    \bottomrule
+    \end{tabular}
+    \begin{tablenotes}
+    \item \small \textit{Note:} Summary statistics using prices from each second across 5 groups and 120 seconds over 20 trading periods. 
+    \end{tablenotes}
+    \end{threeparttable}
+    % }
+    \label{tab:summary_stat_raw}
+\end{table}
+
+% \subsection{Summary statistics and distribution of profits}
+% \begin{table}[H]
+%     \centering
+%     \caption{Summary of Profits}
+%     \renewcommand{\arraystretch}{1}
+%     % \resizebox{\textwidth}{!}{
+%     \begin{threeparttable}        
+%     \begin{tabular}{lcccccc}
+%     \hline 
+%         & \multicolumn{2}{c}{T1 - T20} & \multicolumn{2}{c}{T1 - T10}  & \multicolumn{2}{c}{T11 - T20}  \\
+%         & CDA          &  FLOW          & CDA          &  FLOW        & CDA          &  FLOW          \\
+%     \hline
+%     \multicolumn{7}{l}{(a) \textit{Gross Profits}} \\    
+%     \midrule
+%     \hspace{3mm}Overall         & 1223     & 1184     & 1158     & 1120     & 1288      & 1249      \\
+%                                 & (1128)   & (1106)   & (1090)   & (1082)   & (1161)    & (1127)    \\
+%     \hspace{3mm}Sellers         & 891      & 1053     & 936      & 1039     & 845       & 1067      \\
+%                                 & (936)    & (1036)   & (997)    & (992)    & (871)     & (1080)    \\
+%     \hspace{3mm}Buyers          & 1555     & 1316     & 1380     & 1200     & 1730      & 1431      \\
+%                                 & (1203)   & (1159)   & (1136)   & (1162)   & (1246)    & (1146)    \\
+%     [1ex]
+%     \multicolumn{7}{l}{(b) \textit{Excess Profits}} \\
+%     \midrule
+%     \hspace{3mm}Overall         & -227     & -266     & -292     & -330     & -162      & -201      \\
+%                                 & (1031)   & (910)    & (1043)   & (975)    & (1016)    & (836)     \\
+%     \hspace{3mm}Sellers         & -544     & -382     & -499     & -396     & -590      & -368      \\
+%                                 & (1028)   & (951)    & (1069)   & (1066)   & (985)     & (822)     \\
+%     \hspace{3mm}Buyers          & 90       & -149     & -85      & -265     & 265       & -34       \\
+%                                 & (933)    & (853)    & (976)    & (871)    & (854)     & (819)     \\
+%     \hline
+%     \end{tabular}
+%     \begin{tablenotes}
+%     \item \small
+%     \textit{Note:} Gross profit is the average of individual trader's end-of-period profit across 5 groups over all 20 trading periods. Excess profit is the average of the difference between individual trader's end-of-period profit and the individual CE profit across 5 groups over all 20 trading periods. 
+%     \end{tablenotes}
+%     \end{threeparttable}
+%     % }
+%     \label{tab:summary_stat_profits}
+% \end{table}
+
+% \begin{figure}[H] 
+%     \centering
+%     \caption{Profit Distribution}
+%     \begin{subfigure}[b]{.5\linewidth}
+%         \centering
+%         \begin{adjustbox}{trim=0 0 0 {.11\height}, clip=true}
+%             \includegraphics[width=\linewidth]{new plots/group_gross_profits_cdf.png}
+%         \end{adjustbox}
+%         \subcaption{\tiny Gross CDF}
+%     \end{subfigure}%
+%     \begin{subfigure}[b]{.5\linewidth}
+%         \centering
+%         \begin{adjustbox}{trim=0 0 0 {.11\height}, clip=true}
+%             \includegraphics[width=\linewidth]{new plots/excess_profits_cdf.png}
+%         \end{adjustbox}
+%         \subcaption{\tiny Excess CDF}
+%     \end{subfigure}
+%     \label{fig:profits}
+% \end{figure}
+
+
+\subsection{Evolution of contract filling}
+
+
+
+\begin{figure}[H]
+    \centering
+    %--------------------  CDA  --------------------%
+    \begin{subfigure}[b]{.33\linewidth}
+        \centering
+        \begin{adjustbox}{trim=0 0 0 {0.00\height},clip=true}
+            \includegraphics[width=\linewidth]{plots_app (Nov 25)/groups_cda_contract.png}
+        \end{adjustbox}
+        \subcaption{CDA}
+    \end{subfigure}%  % no space before %
+    %--------------------  Flow30  ------------------%
+    \begin{subfigure}[b]{.33\linewidth}
+        \centering
+        \begin{adjustbox}{trim=0 0 0 {0.00\height},clip=true}
+            \includegraphics[width=\linewidth]{plots_app (Nov 25)/groups_flow30_contract.png}
+        \end{adjustbox}
+        \subcaption{Flow30}
+    \end{subfigure}
+    %--------------------  Flow60  ------------------%
+    \begin{subfigure}[b]{.33\linewidth}
+        \centering
+        \begin{adjustbox}{trim=0 0 0 {0.00\height},clip=true}
+            \includegraphics[width=\linewidth]{plots_app (Nov 25)/groups_flow60_contract.png}
+        \end{adjustbox}
+        \subcaption{Flow60}
+    \end{subfigure}
+    \caption{Percentage of the contract quantity executed.\footnotesize\;Each panel shows the ratio between shares actually traded and the contractual quantity in every paid period.  Values slightly above 1 arise when traders reverse part of an already fulfilled contract and then refill it.}
+    \label{fig:contract-fill}
+\end{figure}
+
+
+
+
+
+
+
+
+\newpage
+\subsection{More probes into Flow format behavior}
+\label{app:behaviour}
+
+
+%----------------------------------------------------------------------
+%=======================  table: correlations
+%----------------------------------------------------------------------
+
+% \begin{table}[H]
+% \centering
+% \caption{Pearson Correlations Between Behavioral Variables (group–level averages)}
+% \label{tab:correlations-appendix}
+% % \scriptsize
+% \setlength{\tabcolsep}{5pt}
+% \begin{threeparttable}
+% \begin{tabular}{@{}lcccccc@{}}
+% \toprule
+%  % & \multicolumn{1}{c}{EP\,vs.\,$P-dev$} & \multicolumn{1}{c}{EP\,vs.\,MRate\%} & \multicolumn{1}{c}{EP\,vs.\,$\Delta P$} & \multicolumn{1}{c}{$\Delta p$\,vs.\,MRate} & \multicolumn{1}{c}{$\Delta p$\,vs.\,$\Delta P$} & \multicolumn{1}{c}{$\Delta P$\,vs.\,Rate\%} \\
+%  & \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}}EP vs.\\$pMg$\end{tabular}} 
+% & \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}}EP vs.\\$U_{max}$\end{tabular}} 
+% & \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}}EP vs.\\$pw$\end{tabular}} 
+% & \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}}$$pMg$$ vs.\\$U_{max}$\end{tabular}} 
+% & \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}}$$pMg$$ vs.\\$pw$\end{tabular}} 
+% & \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}}$pw$ vs.\\$U_{max}$\end{tabular}} \\
+
+% \midrule
+% \multicolumn{7}{@{}l}{\textit{Flow30 — Buyers}} \\
+% \quad T1–T10  & -0.022 & -0.306 & -0.058 &  0.133 & -0.004 & -0.371 \\
+% \quad T11–T20 &  0.141 & -0.195 &  0.119 & -0.108 & -0.024 & -0.333 \\[4pt]
+% \multicolumn{7}{@{}l}{\textit{Flow30 — Sellers}} \\
+% \quad T1–T10  &  0.350 & -0.029 &  0.070 &  0.110 & -0.054 &  0.286 \\
+% \quad T11–T20 &  0.005 & -0.103 &  0.006 &  0.100 & -0.039 &  0.249 \\[4pt]
+% \multicolumn{7}{@{}l}{\textit{Flow60 — Buyers}} \\
+% \quad T1–T10  & -0.036 &  0.083 &  0.170 & -0.104 & -0.160 &  0.238 \\
+% \quad T11–T20 & -0.275 &  0.109 &  0.279 & -0.206 & -0.077 &  0.097 \\[4pt]
+% \multicolumn{7}{@{}l}{\textit{Flow60 — Sellers}} \\
+% \quad T1–T10  & -0.034 &  0.193 & -0.130 & -0.144 & -0.043 & -0.222 \\
+% \quad T11–T20 &  0.094 & -0.066 &  0.173 & -0.126 &  0.237 & -0.213 \\
+% \bottomrule
+
+% \end{tabular}
+% \begin{tablenotes}[flushleft]
+% \footnotesize
+% \item \textit{Notes:} EP = Excess profit; $pMg$ = Price margin (order price deviation from contract price); $pw$ = Price width $=p_H-p_L$; $U_{max}$ = Chosen maximum rate. 
+% % Pearson for now.
+% % \hl{All coefficients are Spearman correlations computed at the group level}.
+% % KL: ask Yilin about the level of this calculation 
+% \end{tablenotes}
+% \end{threeparttable}
+% \end{table}
+
+%%%%%%%%%%%%
+\begin{table}[H]
+\centering
+\caption{Spearman Correlations Between Behavioral Variables (group–level averages)}
+\label{tab:correlations-appendix}
+% \scriptsize
+\setlength{\tabcolsep}{5pt}
+\begin{threeparttable}
+\begin{tabular}{@{}lcccccc@{}}
+% \begin{tabular}{@{}lrrrrrr@{}}
+\toprule
+ & \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}}EP vs.\\$pm$\end{tabular}} 
+& \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}}EP vs.\\$U_{max}$\end{tabular}} 
+& \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}}EP vs.\\$pw$\end{tabular}} 
+& \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}}$$pm$$ vs.\\$U_{max}$\end{tabular}} 
+& \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}}$$pm$$ vs.\\$pw$\end{tabular}} 
+& \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}}$pw$ vs.\\$U_{max}$\end{tabular}} \\
+\midrule
+\textit{Flow30 — Buyers} & & & & & & \\
+\quad T1--T10 & 0.017 & -0.243 & -0.000 & -0.132 & 0.088 & -0.370 \\
+\quad T11--T20 & -0.074 & -0.180 & 0.193 & 0.026 & 0.089 & -0.359 \\
+\textit{Flow30 — Sellers} & & & & & & \\
+\quad T1--T10 & -0.230 & -0.044 & 0.059 & -0.106 & 0.117 & 0.314 \\
+\quad T11--T20 & -0.026 & -0.066 & -0.053 & -0.150 & 0.039 & 0.278 \\
+\textit{Flow60 — Buyers} & & & & & & \\
+\quad T1--T10 & 0.045 & 0.089 & 0.183 & 0.187 & 0.258 & 0.244 \\
+\quad T11--T20 & 0.244 & 0.109 & 0.254 & 0.199 & 0.113 & 0.121 \\
+\textit{Flow60 — Sellers} & & & & & & \\
+\quad T1--T10 & 0.040 & 0.214 & -0.040 & 0.091 & 0.019 & -0.243 \\
+\quad T11--T20 & -0.056 & -0.066 & 0.138 & 0.238 & -0.208 & -0.257 \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}[flushleft]
+\footnotesize
+\item \textit{Notes:} EP = Excess profit; $pm$ = Price markup (order price deviation from contract price); $pw$ = Price width $=p_H-p_L$; $U_{max}$ = Chosen maximum rate. 
+% Pearson for now.
+% \hl{All coefficients are Spearman correlations computed at the group level}.
+% KL: ask Yilin about the level of this calculation 
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+% \hl{Add comments and fix notation, e.g., pw and pm.}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{plots_app (Nov 25)/groups_flow_price_dev_from_contract_cdf_full.png}
+    \caption{\textbf{Price Markup Distributions. } \footnotesize For Flow format we report the minimum markup.
+%, which might be different than what traders expect to profit, which in turn depends on the other flow price. Clearly, for both formats, 
+   The vast majority are positive. 
+   Overall, only 4\%  of Flow orders have zero markup, i.e., set their worst limit price at the contract price.}
+    \label{fig:priceMargin}
+\end{figure}
+
+% Counts of zero price minimum margin 
+% \begin{table}[H]
+%     \centering
+%     \begin{tabular}{c|c}
+%         Flow30 Buyer T1-T10 & 2 \\
+%         Flow60 Buyer T1-T10 & 2 \\
+%         Flow30 Seller T1-T10 & 18 \\ 
+%         Flow60 Seller T1-T10 & 2 \\
+%         Flow30 Buyer T11-T20 & 11 \\ 
+%         Flow60 Buyer T11-T20 &  9 \\
+%         Flow30 Seller T11-T20 & 30 \\
+%         Flow60 Seller T11-T20 & 3 \\
+%         CDA Buyer T1-T10 & 3 \\
+%         CDA Seller T1-T10 & 2 \\
+%         CDA Buyer T11-T20 & 0 \\
+%         CDA Seller T11-T20 & 7 
+%     \end{tabular}
+%     \caption{Caption}
+%     \label{tab:my_label}
+% \end{table}
+
+
+%----------------------------------------------------------------------
+%======================= EXECUTION PACE  =======================
+%----------------------------------------------------------------------
+
+\begin{figure}[H]
+    \centering
+    \captionsetup[subfigure]{justification=centering}
+    %---------------------------  CDA  ----------------------------------%
+    \begin{subfigure}[t]{\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{plots_app (Nov 25)/groups_cda_rate.png}
+        \caption{CDA}
+        \label{fig:rate_cda}
+    \end{subfigure}\par\medskip
+    %---------------------------  Flow30  --------------------------------%
+    \begin{subfigure}[t]{\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{plots_app (Nov 25)/groups_flow30_rate.png}
+        \caption{Flow30 (speed limit $=30$\,sh/s)}
+        \label{fig:rate_Flow30}
+    \end{subfigure}\par\medskip
+    %---------------------------  Flow60  --------------------------------%
+    \begin{subfigure}[t]{\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{plots_app (Nov 25)/groups_flow60_rate.png}
+        \caption{Flow60 (speed limit $=60$\,sh/s)}
+        \label{fig:rate_Flow60}
+    \end{subfigure}
+    \caption{\textbf{Mean execution pace (shares per second).}  
+    Each panel traces the average rate over consecutive 5 second trading windows. 
+The purple horizontal lines show the pace required to achieve CE.}
+    \label{fig:execution_rates_detailed}
+\end{figure}
+
+
+
+
+
+
+
+
+
+%----------------------------------------------------------------------
+%=======================  Scatter : max–rate usage vs. realised surplus
+%----------------------------------------------------------------------
+\begin{figure}[H]
+    \centering
+    \begin{adjustbox}{trim=0 0 0 {.0\height},clip=true}
+        \includegraphics[width=.78\linewidth]{plots_app (Nov 25)/groups_flow_max_rate_percent_vs_realized_surplus.png}
+    \end{adjustbox}
+    \caption{\textbf{Scatter of the share of the speed limit used
+             ($U_{\max}/U_{\max}^{\text{limit}}$) against realized
+             surplus.} Break down by market side (buyer vs.\ seller) and
+             by Flow variant (R vs.\ S) and first/second session half. Fitted lines are OLS slopes.}
+    \label{fig:scatter_maxrate_realsurplus}
+\end{figure}
+
+
+
+
+% %----------------------------------------------------------------------
+% %=======================  table: correlations
+% %----------------------------------------------------------------------
+
+% \begin{table}[H]
+% \centering
+% \caption{Correlations Between Behavioral Variables (group–level averages)}
+% \label{tab:correlations-appendix}
+% % \scriptsize
+% \setlength{\tabcolsep}{5pt}
+% \begin{threeparttable}
+% \begin{tabular}{@{}lcccccc@{}}
+% \toprule
+%  % & \multicolumn{1}{c}{EP\,vs.\,$P-dev$} & \multicolumn{1}{c}{EP\,vs.\,MRate\%} & \multicolumn{1}{c}{EP\,vs.\,$\Delta P$} & \multicolumn{1}{c}{$\Delta p$\,vs.\,MRate} & \multicolumn{1}{c}{$\Delta p$\,vs.\,$\Delta P$} & \multicolumn{1}{c}{$\Delta P$\,vs.\,Rate\%} \\
+%  & \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}}EP vs.\\$P\text{-dev}$\end{tabular}} 
+% & \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}}EP vs.\\MRate\,(\%)\end{tabular}} 
+% & \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}}EP vs.\\$\Delta P$\end{tabular}} 
+% & \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}}$P\text{-dev}$ vs.\\MRate\,(\%)\end{tabular}} 
+% & \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}}$P\text{-dev}$ vs.\\$\Delta P$\end{tabular}} 
+% & \multicolumn{1}{c}{\begin{tabular}[c]{@{}c@{}}$\Delta P$ vs.\\MRate\,(\%)\end{tabular}} \\
+% \midrule
+% \multicolumn{7}{@{}l}{\textit{Flow30 — Buyers}} \\
+% \quad T1–T10  & -0.022 & -0.306 & -0.058 &  0.133 & -0.004 & -0.371 \\
+% \quad T11–T20 &  0.141 & -0.195 &  0.119 & -0.108 & -0.024 & -0.333 \\[4pt]
+% \multicolumn{7}{@{}l}{\textit{Flow30 — Sellers}} \\
+% \quad T1–T10  &  0.350 & -0.029 &  0.070 &  0.110 & -0.054 &  0.286 \\
+% \quad T11–T20 &  0.005 & -0.103 &  0.006 &  0.100 & -0.039 &  0.249 \\[4pt]
+% \multicolumn{7}{@{}l}{\textit{Flow60 — Buyers}} \\
+% \quad T1–T10  & -0.036 &  0.083 &  0.170 & -0.104 & -0.160 &  0.238 \\
+% \quad T11–T20 & -0.275 &  0.109 &  0.279 & -0.206 & -0.077 &  0.097 \\[4pt]
+% \multicolumn{7}{@{}l}{\textit{Flow60 — Sellers}} \\
+% \quad T1–T10  & -0.034 &  0.193 & -0.130 & -0.144 & -0.043 & -0.222 \\
+% \quad T11–T20 &  0.094 & -0.066 &  0.173 & -0.126 &  0.237 & -0.213 \\
+% \bottomrule
+% \end{tabular}
+% \begin{tablenotes}[flushleft]
+% \footnotesize
+% \item \textit{Notes:} EP = Excess profit; $P-dev$ = Price deviation from contract price; $\Delta P$ = Price range ($p_H-p_L$); MRate = Chosen maximum rate. All coefficients are Spearman correlations computed at the group level.
+% % KL: ask Yilin about the level of this calculation 
+% \end{tablenotes}
+% \end{threeparttable}
+% \end{table}
+
+
+
+
+% =============== Scatter plots
+
+\begin{figure}[H]
+    \centering
+    \captionsetup[subfigure]{justification=centering}
+    %---------------------  (a) Price‐range width vs. profit  --------------------%
+    \begin{subfigure}[t]{0.65\textwidth}
+        \centering
+        \includegraphics[width=.85\textwidth]{plots_app (Nov 25)/groups_flow_pH-pL_vs_excess_profit.png}
+        \caption{Price‐range width ($p_H\!-\!p_L$) against excess profit.}
+        \label{fig:range_profit}
+    \end{subfigure}\par\medskip
+    %---------------------  (b) Max-rate share vs. profit  -----------------------%
+    \begin{subfigure}[t]{0.65\textwidth}
+        \centering
+        \includegraphics[width=.85\textwidth]{plots_app (Nov 25)/groups_flow_max_rate_percent_vs_excess_profit.png}
+        \caption{$U_{max}/U^{limit}_{max}$ vs.\ excess profit.}
+        \label{fig:rate_profit}
+    \end{subfigure}\par\medskip
+    %---------------------  (c) Price deviation vs. profit  ----------------------%
+    \begin{subfigure}[t]{0.65\textwidth}
+        \centering
+        \includegraphics[width=.85\textwidth]{plots_app (Nov 25)/groups_flow_price_dev_from_contract_vs_excess_profit.png}
+        \caption{Price markup ($pm$) against excess profit.}
+        \label{fig:dev_profit}
+    \end{subfigure}
+    \caption{\textbf{Behavioral levers and realized surplus.}  
+             Each panel scatters plot show a variable against excess
+             profit at the trader level. Panel (a) plots order price width \(p_H-p_L\) versus excess profit, panel (b) plots $U_{max}/U^{limit}_{max}$ versus excess profit (c) plots the price markup versus excess profit. Each dot is a trader–period observation.}
+    % \label{fig:lever_profit}
+    \label{fig:app_excess-profit-correlations}
+\end{figure}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+

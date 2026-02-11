@@ -1,0 +1,1026 @@
+\documentclass[10pt]{beamer}
+% \usepackage{inputenc}
+% \usepackage{graphicx}
+% \usepackage{enumerate}
+% \usepackage{listings}
+\usepackage{caption, subcaption}
+\captionsetup[subfigure]{justification=centering}
+\captionsetup{font=scriptsize,labelfont=scriptsize}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+% \usetheme{metropolis}    
+% \usepackage{verbatim}
+% \usepackage{alltt}
+% \usepackage{xcolor}
+% \usepackage{appendixnumberbeamer}
+\usepackage{animate}
+% \usepackage{xmpmulti}
+\usepackage{threeparttable, longtable}
+\usepackage{booktabs}
+% \usepackage{setspace}
+% \usepackage{adjustbox}
+% \usepackage[T1]{fontenc}
+% \usepackage[colorlinks=true, allcolors=blue]{hyperref}
+% % \usepackage{color,soul}
+%\usepackage{tikz}
+% \usepackage{multirow}
+% \usepackage{float}
+% \usepackage{placeins}
+
+\usepackage{tikz}
+\usetikzlibrary{tikzmark,overlay-beamer-styles, calc}
+\usepackage{beamerthemesplit} % new 
+\usepackage{graphicx}
+\usepackage{cases}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{lmodern}
+\usepackage{color}
+\usetheme{Warsaw}
+
+\title[FlowMkts]{A Laboratory Test of Flow Trading}
+\author[DF]{Daniel Friedman\thanks{Econ Departments, UCSC and U of Essex}
+\and Yilin Li\thanks{Econ Department, UCSC}
+\and Kristian Lopez Vargas\thanks{Econ Department, UCSC}
+}
+\useoutertheme{infolines}
+
+\begin{document}
+
+\date[Essex]{BEDE Internal Seminar\\
+University of Essex\\
+12 November, 2025
+} 
+
+\frame{\titlepage} 
+
+
+\tableofcontents
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Motivation}
+\begin{frame}{
+The continuous double auction (CDA) market format}
+\begin{itemize}
+\item dominated in 20th century financial markets 
+\item but it is now problematic.  \pause
+\end{itemize}
+Due to the conjunction of:
+\begin{itemize}
+\item strict price/time priority  
+\item coarse price grid, and 
+\item modern telecommunication and computing technology.
+
+ \end{itemize} 
+ \end{frame}
+
+\begin{frame}{Creates a ``tilted playing field'': }
+incentives to be the first to snap up stale bids/asks may lead to
+ \pause
+\begin{enumerate}
+%\item Unequal opportunities to mitigate price impact
+\item unproductive rent-seeking: 10s \$billions on sub-ms speed advantage \pause
+\item reduced true liquidity due to toxic takers (``sniping'') \pause
+\item increased danger of ``flash crashes,'' as algorithms interact. \pause
+  \end{enumerate}
+Also tilted by access to complicated ''order shredding'' algorithms.
+\end{frame}
+
+\begin{frame}{Reform proposals}
+for financial market formats include:
+    \begin{itemize}
+\item IEX: see e.g., M. Lewis (2014), Aldrich and Friedman (2023); \pause
+\item FBA: see e.g., Budish et al (2015), Aldrich and Lopez Vargas (2019); and \pause
+\item Flow markets:  Kyle \& Lee (2017), Budish et al. (2023).
+\end{itemize}
+% The last is my personal favorite, and the subject of today's presentation.
+\end{frame}
+
+\begin{frame}{Flow market advocates claim}
+that it will bring major benefits:
+\begin{enumerate}
+\item[0.] Implementable and understandable by human traders.
+\item mitigates price impact 
+(and volatility) by internalizing order shredding \pause
+\item virtually eliminates sniping, and \pause
+\item facilitates portfolio trades for interrelated assets.
+\end{enumerate}
+\end{frame}
+
+
+
+\begin{frame}{Our paper}
+
+\textbf{compares CDA and Flow} market formats in a simple lab environment  with finely divisible asset units. 
+\pause
+
+This environment is 
+suitable for testing claims 0 and 1.
+\pause
+
+It is \textbf{not} designed to test claims 2 and 3, though it does help set the stage. \pause 
+
+\bigskip
+
+We run a horse race (CDA vs Flow format), not a test of theory,\\ \pause 
+aiming for \textbf{impact} on how major financial markets operate a decade from now.
+\pause 
+\medskip
+
+We compare across formats:
+\begin{itemize}
+\item traders' behavior \pause
+\item market outcomes including 
+\begin{itemize}
+    \item price dynamics \pause
+\item trade volume, and \pause
+\item informational and allocative efficiency. 
+\end{itemize} 
+\end{itemize}
+
+
+\end{frame}
+
+
+
+
+\section{Market Formats}
+
+\begin{frame}{Continuous Double Auction (CDA) Format}
+processes standard limit orders.
+\begin{itemize}
+    \item These orders are defined by \textbf{three parameters}:$\rightarrow$ ``\underline{Buy/sell} up to \underline{$Q_{max}$} (shares) at a price of \underline{$P$} (dollars per share) or better."
+\item Asynchronous order submission within a known time interval. 
+\begin{itemize}
+\item If a new order does not \textbf{cross} a queued contra-side order, then it is queued in the book. 
+\item If it does cross, then it transacts immediately at the best price(s) on the other side of the market.
+\end{itemize}
+\item Strict \textbf{(price, time) priority}. If there is a tie on price, then older orders are filled first.
+    \end{itemize} 
+\end{frame}
+
+\begin{frame}{CDA - Example}
+    \begin{figure}[H]
+        \centering
+        \begin{tikzpicture}[scale=.6]
+        \draw[thick,-] (0,0) -- (0,9) node[above]{$Price (\$/share)$};
+        \draw[thick,-] (0,0)--(10,0) node[right]{$Quantity (shares)$};
+        \node[left] at (0,1) {$41.21$};
+        \node[left] at (0,2) {$41.22$};
+        \node[left] at (0,3) {$41.23$};
+        \node[left] at (0,4) {$41.24$};
+        \node[left] at (0,5) {$41.25$};
+        \node[left] at (0,6) {$41.26$};
+        \node[left] at (0,7) {$41.27$};
+        \node[left] at (0,8) {$41.28$};
+        \node[left] at (0,9) {$41.29$};
+        \node[below] at (2,0) {$500$};
+        \node[below] at (4,0) {$1000$};
+        \node[below] at (6,0) {$1500$};
+        \node[below] at (8,0) {$2000$};
+        \node[below] at (0,0) {$0$};
+        \draw[blue,solid] (0.03,9) -- (0,3) -- (2,3) -- (2,3) -- (5,3) -- (5,2) -- (9,2) node[right]{Buy Orders} ;
+        \draw[red,solid] (0.02,0) -- (0,4.05) -- (3.2,4.05) -- (3.2,5) -- (5,5) -- (5,6) -- (7,6) -- (7,8) -- (9,8) node[right]{Sell Orders};
+        \node[above right] at (0,4.05) {Ask Price};
+        \draw[fill=red] (0,4.05) circle [radius=.1];
+        \node[below right] at (0,3) {Bid Price};
+        \draw[fill=blue] (0,3) circle [radius=.1];
+        \end{tikzpicture}
+        \caption{Standard Limit Order Book}
+    \end{figure}
+\end{frame}
+
+
+\begin{frame}{CDA - Example (at one instant)}
+    \begin{figure}[H]
+        \centering
+        \begin{tikzpicture}[scale=.6]
+        \draw[thick,-] (0,0) -- (0,9) node[above]{$Price (\$/share)$};
+        \draw[thick,-] (0,0)--(10,0) node[right]{$Quantity (shares)$};
+        \node[left] at (0,1) {$41.21$};
+        \node[left] at (0,2) {$41.22$};
+        \node[left] at (0,3) {$41.23$};
+        \node[left] at (0,4) {$41.24$};
+        \node[left] at (0,5) {$41.25$};
+        \node[left] at (0,6) {$41.26$};
+        \node[left] at (0,7) {$41.27$};
+        \node[left] at (0,8) {$41.28$};
+        \node[left] at (0,9) {$41.29$};
+        \node[below] at (2,0) {$500$};
+        \node[below] at (4,0) {$1000$};
+        \node[below] at (6,0) {$1500$};
+        \node[below] at (8,0) {$2000$};
+        \node[below] at (0,0) {$0$};
+        \draw[blue,solid] (0.03,9) -- (0,5) -- (2,5) -- (2,3) -- (5,3) -- (5,2) -- (9,2) node[right]{Buy Orders} ;
+        \draw[red,solid] (0.02,0) -- (0,4.05) -- (3.2,4.05) -- (3.2,5) -- (5,5) -- (5,6) -- (7,6) -- (7,8) -- (9,8) node[right]{Sell Orders};
+        \node[above right] at (0,4.05) {Ask Price};
+        \draw[fill=red] (0,4.05) circle [radius=.1];
+        \node[below right] at (0,3) {Bid Price};
+        \draw[fill=blue] (0,3) circle [radius=.1];
+        \end{tikzpicture}
+        \caption{Standard Limit Order Book}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Flow Market Format}
+processes Flow Orders.
+    \begin{itemize}
+\item A FO has \textbf{five parameters}: $\rightarrow$ ``\underline{Buy/Sell} up to a cumulative total of  \underline{$Q_{max}$} (shares) at maximum rate \underline{$U_{max}$} (shares per second) at prices between \underline{$P_{L}$} and \underline{$P_{H}$} (dollars per share)."
+\item Consider a buy order. The (buying rate or) flow demand $U(p(t))$ is the decreasing pw linear function:
+\begin{align}
+                U{(p(t))}=
+                \begin{cases}
+                    U_{max} & \text{ if } p{(t)} < P_{L} \\
+                    (\frac{P_{H}-p(t)}{P_{H}-P_{L}})U_{max} & \text{ if } P_L \leq p{(t)} \leq P_H \\
+                    0  & \text{ if } p{(t)} > P_{H} \\
+                \end{cases}
+\end{align}
+        where $p(t)$ is the clearing price at time $t$.
+\item The flow supply (rate) is an analogous pw linear monotone \textbf{increasing} function of $p(t)$
+    \end{itemize}
+\end{frame}
+
+
+\begin{frame}{FLOW format example - Individual}
+    \begin{figure}
+        \centering
+        \includegraphics[width=\textwidth]{figures/flow.png}
+        \caption{Continuous Scaled Limit Orders}
+        \label{fig:flow}
+    \end{figure}
+\end{frame}
+
+
+\begin{frame}{Flow market clearing example}
+    \begin{figure}[H]
+        \centering
+        \begin{tikzpicture}[scale=0.6]
+            \draw[thick,-] (0,0) -- (0,9) node[above]{$Price (\$/share)$};
+            \draw[thick,-] (0,0)--(9,0) node[right]{\begin{tabular}{c}
+                 Flow rate \\
+                 (100s shares/sec.)
+            \end{tabular}};
+            \node[left] at (0,1.5) {$41.22$};
+            \node[left] at (0,3.0) {$41.23$};
+            \node[left] at (0,4.5) {$41.24$};
+            \node[left] at (0,6.0) {$41.25$};
+            \node[left] at (0,7.5) {$41.26$};
+            \node[left] at (0,9.0) {$41.27$};
+            \node[below] at (1,0) {$5$};
+            \node[below] at (2,0) {$10$};
+            \node[below] at (3,0) {$15$};
+            \node[below] at (4,0) {$20$};
+            \node[below] at (5,0) {$25$};
+            \node[below] at (6,0) {$30$};
+            \node[below] at (7,0) {$35$};
+            \node[below] at (8,0) {$40$};
+            \node[left] at (0,0) {$0$};
+            \draw[blue,solid] (1,7.5) -- (2.5,6.0) -- (6.5,4.5) -- (7.5,3) -- (8,1.5) node[right]{Buy Orders} ;
+            \draw[red,solid] (0.8,1.5) -- (1.8,3) -- (2,4.5) -- (5.5,6) -- (8,7.5) node[right]{Sell Orders};
+            \draw[red,dashed] (2.5,6.0) -- (5.5,6.0);
+            \draw[blue,dashed] (2,4.5) -- (6.5,4.5);
+            \node[black,above] at (4,6.0) {Excess Supply};
+            \node[black,below] at (4.25,4.5) {Excess Demand};
+            \draw[dashed] (4.1,0) -- (4.1,5.4);
+            \draw[dashed] (0,5.4) -- (4.1,5.4);
+            \node[above right] at (4.1,0) {$U(t)=20.8$};
+            \draw[fill] (4.1,0) circle [radius=.1];
+            \node[left] at (0,5.4) {$P(t)=\$41.246$};
+            \draw[fill] (0,5.4) circle [radius=.1];
+        \end{tikzpicture}
+        \caption{Flow Order Book}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Flow format pricing}
+Downward sloping demand schedule and upward sloping supply schedule are both continuous (p-w lin.) functions of price $\rightarrow$ \textbf{unique} clearing price and overall flow. \pause
+\begin{itemize}
+\item All flow orders ares treated \textbf{symmetrically} and executed \textbf{simultaneously} at the market clearing price. \pause
+\item Price changes only when a new order arrives, or an existing order achieves $Q_{max}$ or is cancelled.
+\item Traders have \textbf{equal} access to \textbf{opportunities for order shredding}; $P_H - P_L$ and $U_{max}$ are  \textbf{``within-exchange''}
+instructions to shred. \pause
+\item Consequently, sophisticated algorithms to shred orders would seem unprofitable in the Flow format.
+    \end{itemize} %\pause
+%Aside: the ``portfolio'' version in Budish et al (2023) is a practical implementation of my monetary exchange process with unified prices. 
+\end{frame}
+
+
+\section{Lab Implementation}
+
+\begin{frame}{Experiment Design: Main Elements}
+    \begin{itemize}
+        \item Markets of \textbf{8} traders, \textbf{20 paid periods} each (following 2 practice periods). \pause
+        \item In each trading period each trader receives a \textbf{buy or sell contract} committing the experimenter to buy or sell up to $x$ shares at some point during the trading period 
+        \item e.g., at $t=$ 115, computer will buy up to 300 shares from you at price 13. 
+        \item Contracts are private information \pause
+        \item simplifications: contracts all sent in first few seconds and are fulfilled in last few seconds; traders' inventories are restricted to $[-Q_{contract}, 0]$ for sellers or $[0, Q_{contract}]$ for buyers.
+        \item Subjects can submit and update buy and sell orders at any time. \pause
+        \item \textbf{Treatments}: \{CDA, Flow30, Flow60\}, 5 sessions each. 
+        \item speed limit: $U_{max} \leq 30$ or 60.
+        \item W/in session, three sets of contracts varied across 5 blocks of 4 periods each. 
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Experiment Design: Contracts}
+    \input{figures/contracts_figures_new}
+\end{frame}
+
+
+\begin{frame}{Experiment Design: Interface - CDA}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth]{figures/cda_ui.png}
+        \caption{CDA UI}
+        \label{fig:cda_ui}
+    \end{figure}
+\end{frame}
+
+
+
+\begin{frame}{Experiment Design: Interface - FLOW}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth]{figures/flow_ui.png}
+        \caption{Flow30 UI}
+        \label{fig:flow_ui}
+    \end{figure}
+\end{frame}
+
+
+
+
+\begin{frame}{Hypotheses}
+    \begin{itemize}
+\item[H1.] \textit{Traders will submit fewer but larger orders in Flow than in CDA format.} \pause
+\vspace{0.3cm}
+        \item[H2.] \textit{Price volatility will be lower in Flow than in CDA format.}\pause
+\vspace{0.3cm}        
+        \item[H3.] \textit{Markets will be more liquid [lower PPI] in Flow than in CDA format.} \pause
+\vspace{0.3cm}
+        \item[H4.] \textit{The CDA and Flow formats will exhibit similar levels of trade volume.} \pause
+\vspace{0.3cm}        
+        \item[H5.] \textit{The CDA and Flow formats will exhibit similar levels of \\ (a) informational and (b) allocative efficiency.} 
+    \end{itemize}
+\end{frame}
+
+
+\section{Results}
+
+\begin{frame}{Summary of Results}
+
+\begin{enumerate}
+    \item[R1:] \textbf{Flow} Market treatments exhibit \textbf{fewer and larger orders}.  \pause 
+
+    
+    \item[R2:] \textbf{Flow} treatments exhibit \textbf{lower price volatility} compared to the CDA.\\  \pause 
+   
+     \item[R3:] Flow \textbf{PPI} also considerably lower $\implies$ more liquid. \\  \pause 
+    \vspace{0.5cm}
+    
+    \item[R4:] \textbf{Trade Volume:} Flow30 $<$ Flow60 $\approx$ CDA.  \pause 
+    
+    \item[R5a:] \textbf{Allocative efficiency:}. Flow60 $>$ Flow30 $\approx$ CDA.
+    \item[R5b:] \textbf{Informational efficiency:} Flow60 $\leq$ Flow30 $\approx$ CDA..
+    \pause 
+  \vspace{0.5cm}
+    \item[R6:] (ex post) Buyers' excess profits are far larger than Sellers' in CDA, not so much in Flow. 
+    
+\end{enumerate}
+
+
+
+\end{frame}
+
+
+\begin{frame}{Descriptive Stats: Trader Behavior}
+\begin{table}[t]
+%\begin{table}[!htbp]
+    \centering
+    % \caption{Summary Statistics: Traders' Behavior.}
+    % \label{tab:summary_stat_trader}
+    %\renewcommand{\arraystretch}{1}
+    \resizebox{.9\textwidth}{!}{
+    \begin{threeparttable}
+    \begin{tabular}{lccc|ccc}
+   % \toprule
+    ~                               & \multicolumn{3}{c}{T1 - T20} & \multicolumn{3}{c}{T11 - T20} \\
+                                    & CDA       & Flow30      & Flow60      & CDA       & Flow30     & Flow60     \\
+    \midrule 
+     Number of Orders               & 32       & 24            & 26            & 32        & 23            & 25            \\
+    \hspace{3mm}Seller              & 17       & 12            & 13            & 17        & 11            & 12            \\
+    \hspace{3mm}Buyer               & 15       & 12            & 13            & 15        & 12            & 12            \\
+ \hline
+     Shares per Order               & 114      & 186           & 192           & 112       & 188           & 195           \\
+    \hspace{3mm}Seller              & 115      & 185           & 191           & 111       & 185           & 197           \\
+    \hspace{3mm}Buyer               & 114      & 188           & 193           & 113       & 191           & 193           \\
+   \hline
+     Order Price                    & 8.8      & [6.7, 12.6] & [6.9, 11.8] & 8.5      & [6.4, 12.3]  & [7.0, 11.7] \\
+    \hspace{3mm}Seller              & 10.7     & [9.2, 15.5] & [9.4, 14.1] & 10.3     & [8.7, 14.9] & [9.3, 13.6] \\
+    \hspace{3mm}Buyer               & 6.9      & [4.2, 9.7]  & [4.4, 9.5]  & 6.8      & [4.2, 9.7]  & [4.6, 9.8]  \\
+   \hline
+     Order Max Rate                 &          & 19.91         & 34.11         &           & 21.83         & 36.83         \\
+    \hspace{3mm}Seller              &          & 19.67         & 35.82         &           & 21.29         & 39.3          \\
+    \hspace{3mm}Buyer               &          & 20.15         & 32.4          &           & 22.37         & 34.36         \\
+   \hline
+    Orders at Max Quantity          & 0.26     &               &               & 0.26      &               &               \\
+    \hspace{3mm}Seller              & 0.25     &               &               & 0.25      &               &               \\
+    \hspace{3mm}Buyer               & 0.27     &               &               & 0.26      &               &               \\
+   \hline
+    Orders at Speed Limit      &          & 0.38          & 0.22          &           & 0.48          & 0.29          \\
+    \hspace{3mm}Seller              &          & 0.38          & 0.23          &           & 0.46          & 0.30           \\
+    \hspace{3mm}Buyer               &          & 0.39          & 0.21          &           & 0.49          & 0.27          \\
+    \bottomrule
+    \end{tabular}
+%     \begin{tablenotes}
+% \item \footnotesize \textit{Notes:} 
+% \caption{Summary Statistics: Traders' Behavior. 
+% {\footnotesize
+% }}
+% \begin{tablenotes}[para,flushleft]
+% \footnotesize
+% \textit{Note:} 
+% T11-20 columns (or T1-20 columns) report averages over the last 10 periods (or all 20 periods) of each session. CDA columns (or Flow30 or Flow60 columns) report averages over sessions using the Continuous Double Auction (or Flow regular speed limit or Flow stress speed limit) format. Shares per Order is the number of shares $Q$ in a submitted order. Order Price is the limit price in submitted CDA orders, and bracketed prices are low and high prices $[p_L, p_H ]$ in submitted Flow orders. Order Max Rate refers to the maximum trading speed $U_{max}$ specified in a Flow order. Orders at Max Quantity gives the fraction of submitted orders with $Q_{max} = 200$. Orders at Speed Limit gives the fraction of submitted Flow Market orders whose $U_{max}$ is at the speed limit (30 in Flow30 and 60 in Flow60 sessions).
+%\end{tablenotes}
+\end{threeparttable}
+}
+\end{table}
+
+\end{frame}
+
+\begin{frame}{Mean Price Dynamics: CDA, Flow30, Flow60}
+   \begin{figure}[!h] 
+    \centering
+    \begin{subfigure}[b]{\linewidth}
+        \centering
+        % \begin{adjustbox}{trim=0 {.02\height} 0 {.12\height}, clip=true}
+        % \begin{adjustbox}{trim=0 {.02\height} {.10\width} {.11\height},clip=true}
+        %     
+        \includegraphics[width=\linewidth]{plots (Nov 25)/groups_cda_price_single.png}
+        % \end{adjustbox}
+      %  \subcaption{CDA}
+    \end{subfigure}
+    \begin{subfigure}[b]{\linewidth}
+        \centering
+        %\begin{adjustbox}{trim=0 {.02\height} {.10\width} {.11\height},clip=true}
+            \includegraphics[width=1\linewidth]{plots (Nov 25)/groups_flow30_price_single.png}
+       % \end{adjustbox}
+       % \subcaption{Flow30}
+    \end{subfigure} 
+    \begin{subfigure}[b]{\linewidth}
+        \centering
+       % \begin{adjustbox}{trim=0 {.02\height} {.10\width} {.11\height},clip=true}
+            \includegraphics[width=1\linewidth]{plots (Nov 25)/groups_flow60_price_single.png}
+       % \end{adjustbox}
+     %   \subcaption{Flow60}
+    \end{subfigure} 
+   % \caption{\textbf{Transaction prices over time.} \footnotesize Dark green lines (for Flow markets in Panels (b-c)) or dots (for CDA markets in Panel (a)) indicate average prices across the 5 sessions in each format. The purple line represents the underlying competitive equilibrium price for each block of periods. Vertical dotted lines separate the 20 paid periods.
+    % \textcolor{red}{the block and period numbers are too faint to see easily..} 
+    %}    
+    \label{fig:price}
+\end{figure}
+
+
+\end{frame}
+
+\begin{frame}{Trade Volume}
+    \begin{figure}
+        \centering
+        \includegraphics[width=\textwidth]{plots (Nov 25)/groups_mean_quantity.png}
+        \caption{Session-mean prices over time}
+        \label{fig:tvol}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Surplus}
+    \begin{figure}
+        \centering
+    \includegraphics[width=\textwidth]{plots (Nov 25)/groups_mean_surplus.png}
+        \caption{Session-mean surplus over time}
+        \label{fig:surplusOverTime}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Normalized Gross Profit}
+    \begin{figure}
+        \centering
+    \includegraphics[width=0.9\textwidth]{plots (Nov 25)/group_gross_profits_cdf.png}
+        %\caption{Session-mean surplus over time}
+        \label{fig:grossProfits}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Chosen Maxrate cdf's}
+    \begin{figure}
+        \centering
+    \includegraphics[width=0.9\textwidth]{plots (Nov 25)/groups_flow_max_rate_cdf_full.png}
+        %\caption{Session-mean surplus over time}
+        \label{fig:MaxRcdf}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Trading pace}
+ \begin{figure}[h!]
+    \centering
+\includegraphics[width=0.95\linewidth]{new plots/groups_cumsum_compress_all.png}
+\caption{\textbf{Average cumulative executed fraction of the contract quantity.} The second-by-second data are averaged over all trading periods of each format. %Flow execution is almost linear in time, whereas CDA is front-loaded and concave.
+}
+    \label{fig:executed-averaged-cumul}
+\end{figure}
+\end{frame}
+
+% \begin{frame}{Descriptive: Volume and Surplus Dynamics}
+%     \begin{figure}
+%         \centering
+%         % First row: Volume Trends
+%         \begin{subfigure}[b]{0.48\linewidth}
+%             \centering
+%             \includegraphics[width=\linewidth]{figures/groups_cda_quantity.png}
+%             \caption{CDA}
+%             \label{fig:combined_volume_cda}
+%         \end{subfigure}%
+%         \hfill % Space between the figures
+%         \begin{subfigure}[b]{0.48\linewidth}
+%             \centering
+%             \includegraphics[width=\linewidth]{figures/groups_flow_quantity.png}
+%             \caption{FLOW}
+%             \label{fig:combined_volume_flow}
+%         \end{subfigure}
+        
+%         % Second row: Realized Surplus
+%         \begin{subfigure}[b]{0.48\linewidth}
+%             \centering
+%             \includegraphics[width=\linewidth]{figures/groups_cda_surplus.png}
+%             \caption{CDA - Realized Surplus}
+%             \label{fig:combined_surplus_cda}
+%         \end{subfigure}%
+%         \hfill % Space between the figures
+%         \begin{subfigure}[b]{0.48\linewidth}
+%             \centering
+%             \includegraphics[width=\linewidth]{figures/groups_flow_surplus.png}
+%             \caption{FLOW - Realized Surplus}
+%             \label{fig:combined_surplus_flow}
+%         \end{subfigure}
+%     \end{figure}
+% \end{frame}
+
+\begin{frame}{Descriptive Stats: Market Performance}
+   \begin{table}[!h]
+%\begin{table}[t]
+    \centering
+   % \caption{Summary Statistics: Market Performance.}
+    \label{tab:summary_stat}
+    \renewcommand{\arraystretch}{0.9}
+     \resizebox{.95\textwidth}{!}{
+    \begin{threeparttable}
+    \begin{tabular}{lccc|ccc}
+    
+  %  \toprule
+    
+    ~           & \multicolumn{3}{c}{T1 - T20} & \multicolumn{3}{c}{T11 - T20} \\
+                & CDA       & Flow30    & Flow60     & CDA      & Flow30    & Flow60 \\
+    \midrule 
+     \\[-1.8ex] 
+     \multicolumn{7}{l}{\textit{\textbf{(a)} Price Statistics} (Avg. Equil Price = $9.80$ ECUs)} \\
+    % \hline  
+     \\[-1.8ex]    
+     Clearing Prices ($P_\tau$, ECUs)           & 8.62     & 9.37     & 9.45    & 8.21      & 9.18      & 9.29      \\
+    \hspace{3mm}(Std. Dev.)                     & (2.77)   & (2.54)   & (2.14)   & (2.51)    & (2.29)    & (2.01)    \\
+     $ \lvert  P_{\tau} - P_{\tau - 1} \rvert $ & 0.57     & 0.39     & 0.43     & 0.55      & 0.4       & 0.43      \\
+     Std. Dev. of $(\ln P_{\tau} - \ln P_{\tau - 1})$ & 0.14     & 0.07     & 0.08     & 0.13      & 0.07      & 0.08      \\
+     Price Pressure Index (PPI)      & 3.98      & 0.89        & 0.78       & 3.88      & 0.76     & 0.68      \\
+     \\ [-1.8ex]
+     \multicolumn{7}{l}{\textit{\textbf{(b)} Volume, Transaction Intensity}} \\
+     \\ [-1.8ex]
+   
+     Trade Volume (shares)                     & 1138      & 959       & 1121    & 1179      & 1046      & 1175     \\
+     Trade Vol. / $Q_{\text{CE}}$ (\%)        & 93.6      & 78.8      & 92.1    & 96.9      & 86.4     & 96.8   \\
+     Filled Contract / $Q_{\text{CE}}$ (\%)     & 85.2      & 77.1    & 88.1      & 89.3      & 84.5   & 91.8   \\
+     Num. of Transactions                             & 14        &        &   & 15        &      &     \\
+     Mean Transaction Size                      & 78        &         &  & 74        &        &   \\
+     \hspace{3mm}(Std. Dev.)             & (61)      &      &     & (60)      &       &    \\
+     Clearing Rate ($q/sec$)                 &           & 9.37      & 9.69     &           & 9.20       & 9.51     \\
+     
+     \hspace{3mm}(Std. Dev.)             &           & (2.6)    & (2.42)     &           & (2.4)     & (2.13)   \\
+      Time with no Flow Trans. (\%)               &           & 11      & 12    &           & 10        & 11   \\
+
+     \\ [-1.8ex]
+     \multicolumn{7}{l}{\textit{\textbf{(c)} Efficiency and Buyer-Seller Inequality}} \\
+     \\ [-1.8ex]
+     
+     Info. Effic.: $\lvert P_t - P_{\text{CE}} \rvert $        & 2.16      & 2.08    & 2.18  & 2.14      & 1.84    & 2.14  \\     
+     Alloc. Effic.: $\Pi$ / $\Pi_{\text{CE}}$ ($\times 100$)   & 84.3      & 81.81    & 90.04     & 88.85     & 86.31     & 93.55   \\
+     
+     ${\Pi^{\text{buy}}}/{\Pi^{\text{buy}}_{\text{CE}}} - {\Pi^{\text{sell}}}/{\Pi^{\text{sell}}_{\text{CE}}}$ 
+     ($\times 100$) & 53.7      & 11.18    & 9.97    & 80.03     & 27.51    & 17.17    \\
+     \\[-1.8ex] 
+   % \bottomrule
+    \end{tabular}
+%     \begin{tablenotes}[para,flushleft]
+% \footnotesize
+% \textit{Note:} 
+% All price sequences are quantity-weighted within 5-second time intervals, then averaged over all periods and groups. 
+% $|P_{\tau} - P_{\tau-1}|$ is average absolute price change between successive intervals. 
+% Std. Dev. of $\left( \ln P_{\tau} - \ln P_{\tau-1} \right)$ is volatility, the average proportional price change between time intervals. 
+% PPI is the per-share round-trip cost of buying a standard package ($Q^* = 20$ shares) in the time interval.
+% Trade Vol / $Q_{\text{CE}}$ (\%) is the average total quantity transacted as a percentage of the minimum required to reach competitive equilibrium (CE). Filled Contract / $Q_{CE}$ (\%) is the total quantity redeemed when contracts expire as a percentage of the CE quantity.
+%     Number of Transactions and Mean Transaction Size are CDA averages rounded to the nearest integer. 
+%     Clearing Rate is the average market-level transaction rate in Flow trading. 
+%     Time with No Flow Trans. (\%) is the percentage of time intervals with zero clearing rate. 
+%     Informational inefficiency, $|P_{\tau} - P_{CE}|$, and allocation efficiency, $ \Pi/\Pi_{CE} \times 100$ are averaged across trading periods.
+%     The last line is profit asymmetry, the difference $(\Pi^{buy}/\Pi^{buy}_{CE} - \Pi^{sell}/\Pi^{sell}_{CE}) \times 100$ in normalized profits (relative to CE) between buyers and sellers. 
+%     \end{tablenotes} 
+\end{threeparttable}
+
+   }
+\end{table}
+\end{frame}
+
+\begin{frame}{Price Pressure Index (PPI)}
+captures the per-share round trip  cost of buying a standard package ($Q^*=20$ shares) in a time interval ($\Delta t = 5$ sec). \pause
+For CDA it is
+\begin{equation} \label{eq:ppicda}
+    PPI_{CDA} = \frac{1}{Q^*}\int_0^{Q^*} A(Q^{CE}+u,t) - B(Q^{CE}+u,t) du,
+\end{equation}
+the per-share area between orderbook S and D beyond the CE quantity, averaged over grid times $t=10, 15, ... , 110$ in each period. \pause
+For Flow it is
+\begin{equation} \label{eq:ppiflow}
+    PPI_{Flow} = \frac{1}{Q^*}\int_t^{t+\Delta t} a(r+q,s) - b(r+q,s) ds,
+\end{equation}
+where $a$ and $b$ are flow S and D (at time $s$), while $r$ is the clearing flow rate (at intersection of $a$ and $b$) and 
+$q=\frac{Q^*}{\Delta t}=4$ suffices to acquire the standard package over the time grid interval. Again we report averages over grid times $t=10, 15, ... , 110$ in each period. \pause
+
+Caveat: calculation takes observed order books as given. Actual increases in buying and/or selling may provoke traders to alter their order streams.
+\end{frame}
+
+
+
+\subsection{Regression Analysis}
+
+\begin{frame}{Regression Specs}
+For each outcome metric $y$, we estimate: 
+\begin{equation} \label{eq:reg_price}
+    y_{g,t,\tau} = \alpha + \sum^{4}_{i = 1} \left(\beta_i \; \text{Block}_{i,t}\right) + \gamma_R \; \text{Flow30}_{g,t} + \gamma_S \; \text{Flow60}_{g,t}+ \theta \; t + \varphi \; \tau + \epsilon_{g,t, \tau}, 
+\end{equation}
+where  $y_{g,t,\tau}$ is observed value in session $g$, period $t$, time interval $\tau$. \\
+Coefficients $\gamma_R$ and $\gamma_S$ capture the treatment effects of changing format from CDA to Flow30 or to Flow60. \pause
+
+\medskip
+We control for: 
+\begin{itemize}
+\item S-D configuration, via  block fixed effect coefficients $\beta_i$,  
+\item time trends, via coefficient $\theta$ for period number $\text{Period}_{g,t}$, and
+\item session effects, via clustered s.e.'s.
+\end{itemize} \pause
+ 
+% Dependent variables $y$ here are: deviations from CE $ =\mid P^W_t - P_{CE}\mid$, 
+% mean absolute interval-to-interval price change $=\mid P^W_{t} - P^W_{t - 1}\mid$, and 
+% volatility $=Std\left(\ln P^W_{t} - \ln P^W_{t - 1}\right).$
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Regressions testing H1: coef est (and se)}
+\begin{table}[H]
+\centering    
+%\caption{Regression: Traders' Behavior}
+\begin{threeparttable}
+\begin{tabular}{@{\extracolsep{5pt}}lcccc}
+%\toprule
+& \multicolumn{2}{c}{Number of Orders} & \multicolumn{2}{c}{Order Size} \\
+% & \cline{1-4}
+\cmidrule{2-5}
+& T1-T20 & T11-T20 & T1-T20 & T11-T20 \\
+& (1) & (2) & (3) & (4) \\
+\midrule
+Intercept & 36.2$ $ & 41.7$ $ & 154.1$ $ & 160.1$ $ \\
+  & (4.4) & (5.9) & (26.3) & (46.3) \\
+Flow30 & -7.8$ $ & -8.8$ $ & 71.8$ $ & 76.6$ $ \\
+  & (0.8) & (0.8) & (3.8) & (5.9) \\
+Flow60 & -5.7$ $ & -7.0$ $ & 77.7$ $ & 83.0$ $ \\
+  & (0.8) & (0.9) & (5.23) & (7.6) \\
+Period Number  & -0.3$^{}$ & -0.6$ $ & -2.2$^{}$ & -2.7$^{}$ \\
+  & (0.2) & (0.3) & (1.4) & (2.5) \\
+\midrule
+Observations & 200 & 100 & 200 & 100 \\
+Adjusted $R^2$ & 0.327 & 0.487 & 0.604 & 0.619 \\
+\midrule
+CDA avg. & 32 & 32 & 114 & 112 \\
+Flow30 = Flow60 ? & 0.007 & 0.038 & 0.315 & 0.443 \\ % wald test p-value 
+% \bottomrule
+\end{tabular}
+% \begin{tablenotes}[para,flushleft]
+% \footnotesize
+% \textit{Note:} $ $p$<$0.1; $ $p$<$0.05; $ $p$<$0.01. The standard errors within parentheses are cluster-robust at the group level. 
+% The last line reports p-values for the Wald test that the effect sizes are the same for Flow30 and Flow60 sessions.
+% We omit the coefficients of the block dummies. 
+% \end{tablenotes}
+\end{threeparttable}
+\label{tab:TradersBehavior}
+\end{table}
+\end{frame}
+
+
+\begin{frame}{Result 1: Flow Market format exhibits fewer and larger orders than CDA}
+\begin{itemize}
+\item Flow market formats have 6-9 fewer orders submitted per period than the 32 in CDA ($p < 0.01$).
+\item But the orders are about 70-80 shares larger, esp. in later periods than the 114 share CDA baseline ($p < 0.01$). 
+\item Taken together, these results suggest that the Flow market format shreds orders more effectively than the CDA. 
+% \item Overall lower trading volume in Flow, by $\sim$ 130 shares in later periods ($p < 0.05$).
+%\item Order size trends significantly upward over time.
+\end{itemize}   
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{H2-H3: Price Volatility and PPI Regressions}
+\begin{table}[H]
+\centering    
+\resizebox{\textwidth}{!}{
+\begin{threeparttable}
+\begin{tabular}{@{\extracolsep{5pt}}lcccccc}
+\toprule
+& \multicolumn{2}{c}{$\lvert P_{\tau} - P_{\tau - 1}\rvert$} & \multicolumn{2}{c}{SD$\left(\ln P_{\tau} - \ln P_{\tau - 1}\right)$} & \multicolumn{2}{c}{$PPI_{\tau}$} \\
+\cmidrule{2-7}
+& T1-T20 & T11-T20 & T1-T20 & T11-T20 & T1-T20 & T11-T20 \\
+& (1) & (2) & (3) & (4) & (5) & (6) \\
+\midrule
+Intercept & 2.20$ $ & 2.52$ $ & 0.32$ $ & 0.36$ $ & 8.36$ $ & 9.28$ $ \\
+  & (0.31) & (0.46) & (0.06) & (0.08) & (0.61) & (0.89) \\
+Flow60 & -0.68$ $ & -0.47$ $ & -0.06$ $ & -0.05$ $ & -3.21$ $ & -3.20$ $ \\
+  & (0.07) & (0.08) & (0.01) & (0.01) & (0.10) & (0.13) \\
+Flow30 & -0.74$ $ & -0.56$ $ & -0.07$ $ & -0.06$ $ & -3.10$ $ & -3.12$ $ \\
+  & (0.06) & (0.07) & (0.01) & (0.01) & (0.10) & (0.13) \\
+Period number & -0.05$ $ & -0.08$ $ & -0.01$ $ & -0.01$ $ & -0.17$ $ & -0.23$ $ \\
+  & (0.02) & (0.02) & (0.00) & (0.01) & (0.03) & (0.05) \\
+Interval number & 0.00$^{}$ & 0.00$^{}$ & & & -0.09$ $ & -0.07$ $ \\
+  & (0.00) & (0.00) & & & (0.01) & (0.01) \\
+\midrule
+Observations & 4,600 & 2,300 & 200 & 100 & 4,800 & 2,400 \\
+Adjusted $R^2$ & 0.113 & 0.081 & 0.266 & 0.234 & 0.294 & 0.298 \\
+\midrule
+CDA avg. & 0.57 & 0.55 & 0.14 & 0.13 & 3.98 & 3.88 \\
+Flow30 = Flow60 ? & 0.013 & 0.012 & 0.101 & 0.265 & 0.006 & 0.139 
+\end{tabular}
+\end{threeparttable}}
+\label{tab:PriceVolatility}
+\end{table}
+\end{frame}
+
+
+
+\begin{frame}{Result 2: Flow format has lower price volatility than CDA}
+\begin{itemize}
+% \item \textbf{Price efficiency} is similar (insignificantly lower in Flow).
+\item Significantly \textbf{smaller price changes} (by $\sim 0.5 - 0.7$, $p<0.01$) in Flow. 
+\item Also, significantly lower \textbf{volatility} (by $\sim$5-7 pp, nearly half!, $p<0.01$).
+\item Significant \textbf{improvement over time} in these metrics in both formats.
+(Weak evidence elsewhere for more rapid improvement with Flow). 
+\end{itemize}   
+\end{frame}
+
+\begin{frame}{Result 3: Flow format has far greater liquidity than CDA}
+\begin{itemize}
+\item significant increase in liquidity (reduction in PPI) within and across rounds.
+\item PPI is reduced by $\sim 3.1 $ in Flow from $\sim$4 in CDA.
+\item using 2 or 10 sec conventions for $\Delta t$ still cuts PPI to less than 1/3 of its CDA level.
+\end{itemize}   
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%
+
+\begin{frame}{H4: Trade Volume Regression}
+\begin{table}
+\centering    
+%\caption{Trade Volume Regression}
+\begin{threeparttable}
+\begin{tabular}{@{\extracolsep{5pt}}lcccc}
+%\toprule
+& \multicolumn{2}{c}{Trade Volume} & \multicolumn{2}{c}{Filled Cont. Q / $Q_{CE}$} \\
+\cmidrule{2-5}
+& T1-T20 & T11-T20 & T1-T20 & T11-T20 \\
+& (1) & (2) & (3) & (4) \\
+\midrule
+Intercept & 639.7$ $ & 664.1$ $ & 0.552$ $ & 0.595$ $ \\
+  & (163.9) & (283.2) & (0.121) & (0.166) \\
+Flow60 & -17.1$^{}$ & -3.8$^{}$ & 0.029$^{}$ & 0.026$^{}$ \\
+  & (27.1) & (39.8) & (0.020) & (0.022) \\
+Flow30 & -178.8$ $ & -132.3$ $ & -0.080$ $ & -0.048$ $ \\
+  & (28.7) & (38.2) & (0.021) & (0.021) \\
+Period number & 24.9$ $ & 22.5$^{}$ & 0.019$ $ & 0.017$ $ \\
+  & (8.8) & (15.4) & (0.006) & (0.009) \\
+\midrule
+Observations & 200 & 100 & 200 & 100 \\
+Adjusted $R^2$ & 0.476 & 0.324 & 0.279 & 0.171 \\
+\midrule
+CDA avg. & 1138 & 1179 & 0.852 & 0.893 \\
+Flow30 = Flow60 ? & 0.000 & 0.000 & 0.000 & 0.001 
+\end{tabular}
+\end{threeparttable}
+\label{tab:Volume}
+\end{table}
+\end{frame}
+
+\begin{frame}{Result 4: Trade Volume is lower in Flow30 than in Flow60 or CDA.}
+\begin{itemize}
+% \item Flow market format has 8-9 fewer orders submitted per period than the 32 in CDA ($p < 0.01$).
+% \item But the orders are larger, especially in later periods (by $\sim 17$, compared to $\sim$40 in CDA, $p < 0.01$).  
+% \item Taken together, these results suggest that the Flow market format shreds orders more effectively than the CDA. 
+\item Overall lower trading volume in Flow30, still $\sim$ 130 shares in later periods ($p < 0.01$).
+\item Volume in Flow trends upward over time (significantly so in specs not shown with trend*format interaction terms.).
+\item Impact on filling contracts is somewhat less, but still significant at $p=.05$.
+\end{itemize}   
+\end{frame}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%
+
+
+
+
+\begin{frame}{H5: Efficiency Regressions}
+\begin{table}
+\centering    
+\resizebox{\textwidth}{!}{
+\begin{threeparttable}
+\begin{tabular}{@{\extracolsep{5pt}}lcccccc}
+& \multicolumn{2}{c}{$\lvert P_{\tau} - P_{\text{CE}}\rvert$} & \multicolumn{2}{c}{Realized Surplus (\%)} & \multicolumn{2}{c}{Buyer-Seller Disparity} \\
+\cmidrule{2-7}
+& T1-T20 & T11-T20 & T1-T20 & T11-T20 & T1-T20 & T11-T20 \\
+& (1) & (2) & (3) & (4) & (5) & (6) \\
+\midrule
+Intercept & 8.59$ $ & 8.98$ $ & 0.537$ $ & 0.666$ $ & 10507$ $ & 14421$ $ \\
+  & (0.53) & (0.82) & (0.094) & (0.113) & (2363) & (3455) \\
+Flow30 & -0.01$^{}$ & -0.03$^{}$ & -0.025$^{}$ & -0.025$^{}$ & -1608$ $ & -2082$ $ \\
+  & (0.09) & (0.11) & (0.017) & (0.017) & (482) & (610) \\
+Flow60 & 0.16$ $ & 0.24$ $ & 0.057$ $ & 0.047$ $ & -1613$ $ & -2298$ $ \\
+  & (0.09) & (0.12) & (0.014) & (0.014) & (438) & (547) \\
+Period number & -0.25$ $ & -0.27$ $ & 0.019$ $ & 0.012$ $ & -90$^{}$ & -281$^{}$ \\
+  & (0.03) & (0.04) & (0.005) & (0.006) & (129) & (193) \\
+Interval number & -0.05$ $ & -0.05$ $ & & & & \\
+  & (0.01) & (0.01) & & & & \\
+\midrule
+Observations & 4,800 & 2,400 & 200 & 100 & 200 & 100 \\
+Adjusted $R^2$ & 0.371 & 0.482 & 0.363 & 0.193 & 0.800 & 0.828 \\
+\midrule
+CDA avg. & 2.16 & 2.14 & 0.843 & 0.888 & 2537 & 3417 \\
+Flow30 = Flow60 ? & 0.018 & 0.003 & 0.000 & 0.000 & 0.991 & 0.734 
+\end{tabular}
+\end{threeparttable}
+}
+\label{tab:EfficiencyAndDisparity}
+\end{table}
+\end{frame}
+
+
+\begin{frame}{Result 5: Flow60 a bit less informationally efficient and a bit more allocative efficient than Flow30 or CDA}
+\begin{itemize}
+\item Flow30 dummies insignificant.  
+\item Flow60 dummies all positive, indicating larger price deviations (lower price efficiency) and more realized surplus (higher alloc eff). 
+
+\item Significant for surplus, at best marginally signifcant for price. \pause
+\vspace{1cm}
+\item \textbf{Additional Result.} The Flow profit advantage (relative to CE) of buyers over sellers is less than half of that for CDA by the second half of periods, a significant reduction. 
+\end{itemize}   
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\section{Conclusions}
+
+\begin{frame}{Conclusions}
+\textbf{First empirical test} of Flow market format, comparing it to CDA in an induced-value setting with finely divisible units. \pause
+\begin{itemize}
+\item Flow tends to start worse than CDA but to improve faster (learning).
+\item Within exchange \textbf{shredding} seems effective: fewer but larger orders in Flow. %than in CDA.
+\item Price \textbf{volatility} is much lower in Flow. 
+\item \textbf{Liquidity} is also much better (PPI lower). \pause
+\item Some relative \textbf{undertrading} in Flow.
+\item \textbf{Informational  $|P-P_{CE}|$ and allocative efficiencies} are comparable,
+with Flow60 a bit better on alloc and a bit worse on price eff. \pause
+\item Buyer-seller \textbf{asymmetry} in Flow seems reduced.\pause
+\end{itemize} 
+\end{frame}
+
+
+\begin{frame}{Parting Remarks}
+
+Flow works!
+\begin{itemize}
+    \item It is comprehensible by human traders, although perhaps they take longer to master it.
+    \item It does well even in a simple contract environment that
+\begin{itemize}
+    \item aligns better with CDA limit orders, and
+    \item offers no scope for portfolio trades or protection against predatory HFT traders.
+\end{itemize}
+\end{itemize}
+
+
+\vspace{.4in}
+
+\begin{center}
+{\large A good version is available on ssrn for those interested. \\ Suggestions are very welcome!}
+
+\url{dan@ucsc.edu}
+    
+\end{center}
+
+
+\end{frame}
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Appendix}
+
+% \begin{frame}{Experiment Design: Interface - CDA Animation}
+%   \animategraphics[loop,controls,width=\linewidth]{10}{figures/cda_animation/cda_animation-}{0}{252}
+% \end{frame}
+
+
+
+% \begin{frame}{Experiment Design: Interface - FLOW Animation}
+%   \animategraphics[loop,controls,width=\linewidth]{10}{figures/flow_animation/flow_animation-}{0}{419}
+% \end{frame}
+
+
+
+\begin{frame}{Continuous Double Auction (CDA) Format}
+processes standard limit orders.
+\begin{itemize}
+    \item These orders are defined by \textbf{three parameters}:$\rightarrow$ ``\underline{Buy/sell} up to \underline{$Q_{max}$} (shares) at a price of \underline{$P$} (dollars per share) or better."
+\item Asynchronous order submission within a known time interval. 
+\begin{itemize}
+\item If a new order does not \textbf{cross} a queued contra-side order, then it is queued in the book. 
+\item If it does cross, then it transacts immediately at the best price(s) on the other side of the market.
+\end{itemize}
+\item Strict \textbf{(price, time) priority}. If there is a tie on price, then older orders are filled first.
+    \end{itemize} 
+\end{frame}
+
+
+
+\begin{frame}{CDA Timing Issues}
+1. Early bird special  
+    \begin{itemize}
+        \item Since market supply and demand are discontinuous step functions of price, there is \textbf{no guarantee of a single point of intersection}: there can be excess of demand (supply), and often there is. 
+        \item Hence, \textbf{an allocation rule} to determine $\alpha(t_0, t)$ is needed (e.g., time priority, or pro-rata)
+\item In most existing financial markets, orders are \textbf{prioritized} based on \textbf{the time they arrive}, so high speed is rewarded
+\item If an agent can \textbf{react to a relevant signal} (even if public) \textbf{faster} (even if only a tiny bit) than other traders, then she can \textbf{pick off stale orders} from other traders and reverse position after the information has spread in the market.
+\item  Thus: tilted playing field, rent-seeking, toxic takers $\implies$ illiquidity, increased flash crash risk.
+    \end{itemize}
+    2. To avoid adverse price pressure, traders will want to \textbf{shred} large orders.
+    \end{frame}
+
+
+\subsection{Experiment Implementation}
+
+\begin{frame}{Procedures}
+    \begin{itemize}
+        \item We paid the cumulative profits of all 20 payment periods
+        \item Exchange rate is 1000 ECUs = 1 USD and show-up fee is 7 USD \pause
+        \item Experiment software was designed and developed at UCSC's LEEPS Laboratory
+        \item Experiment sessions were conducted in person at LEEPS Laboratory
+        \item So far have 5  FLOW and 5 CDA sessions
+    \end{itemize}
+\end{frame}
+
+\subsection{Outcomes and Hypotheses}
+
+
+\begin{frame}{Outcomes}
+    \begin{itemize}
+        \item For \textbf{trading behavior}, we study: 
+     the number of orders, the size of the orders, submitted prices, and
+     the maximum execution rate in Flow market. \pause
+        \item For \textbf{market performance}, we study:
+        \begin{itemize}
+        \item \textit{Absolute Price Change}, $|P_t - P_{t-1}|$. 
+        \item \textit{Price volatility}, $(\ln P_t - \ln P_{t-1})$ 
+         \item \textit{Trading Volume}, $Q$ (at the market-period level)
+\item\textit{Informational [in]Efficiency},  \( |P_t - P_{\text{CE}}| \). 
+    \item\textit{Allocative Efficiency}, measured as \( \Pi/\Pi_{\text{CE}}\) (at the market-period level). 
+        \end{itemize}
+     
+    \end{itemize}
+\end{frame}
+
+
+\end{document}

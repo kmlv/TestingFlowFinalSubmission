@@ -1,0 +1,130 @@
+\begin{figure}[H]
+    \centering
+    \caption{Contract Design}
+    \begin{subfigure}{.2\linewidth}
+        \centering
+        \begin{tikzpicture}[scale=.13]
+            % create grid
+            \draw[help lines] (0,0) grid (18,20);
+            
+            % Draw axes
+            \draw[->] (-1,0) -- (18,0) node[font=\tiny,right] {$Q$};
+            \draw[->] (0,-1) -- (0,20) node[font=\tiny,above] {$P$};
+          
+            % Draw step functions
+            \draw[blue, thick] (0,20) -- (0,17) -- (6,17) -- (6,16) -- (9,16) -- (9,14) - - (13,14) -- (13,0) ;
+            \draw[red, thick] (0,0) -- (0,3) -- (4,3) -- (4,4) -- (8,4) -- (8,11) --  (11,11) -- (11,14) -- (15,14) -- (15,20);
+            
+            % % Add labels
+            \node[font=\tiny,below left] at (0,0) {$0$};
+            \foreach \x in {5,10,15} {
+              \node[font=\tiny,below] at (\x,0) {$\x00$};
+            }
+            \foreach \y in {5,10,15} {
+              \node[font=\tiny,left] at (0,\y) {$\y$};
+            }
+        \end{tikzpicture}
+        \subcaption{\tiny Block 1 \\ (T1 - T4)}
+    \end{subfigure}%
+    \begin{subfigure}{.2\linewidth}
+        \centering
+        \begin{tikzpicture}[scale=.13]
+            % create grid
+            \draw[help lines] (0,0) grid (18,20);
+            
+            % Draw axes
+            \draw[->] (-1,0) -- (18,0) node[font=\tiny,right] {$Q$};
+            \draw[->] (0,-1) -- (0,20) node[font=\tiny,above] {$P$};
+          
+            % Draw step functions
+            \draw[blue, thick] (0,20) -- (0,17) -- (4,17) -- (4,15) -- (8,15) -- (8,8) -- (12,8) -- (12,6) -- (16,6) -- (16,0);
+            \draw[red, thick] (0,0) -- (0,3) -- (3,3) -- (3,4) -- (6,4) -- (6,5) -- (10,5) -- (10,6) -- (14,6) -- (14,20);
+            
+            % % Add labels
+            \node[font=\tiny,below left] at (0,0) {$0$};
+            \foreach \x in {5,10,15} {
+              \node[font=\tiny,below] at (\x,0) {$\x00$};
+            }
+            \foreach \y in {5,10,15} {
+              \node[font=\tiny,left] at (0,\y) {$\y$};
+            }
+        \end{tikzpicture}
+        \subcaption{\tiny Block 2 \\ (T5 - T8)}
+    \end{subfigure}%
+    \begin{subfigure}{.2\linewidth}
+        \centering
+        \begin{tikzpicture}[scale=.13]
+            % create grid
+            \draw[help lines] (0,0) grid (18,20);
+            
+            % Draw axes
+            \draw[->] (-1,0) -- (18,0) node[font=\tiny,right] {$Q$};
+            \draw[->] (0,-1) -- (0,20) node[font=\tiny,above] {$P$};
+          
+            % Draw step functions
+            \draw[blue, thick] (0,20) -- (0,16) -- (3,16) -- (3,15) -- (7,15) -- (7,14) -- (11,14) -- (11,10) -- (15,10) -- (15,0);
+            \draw[red, thick] (0,0) -- (0,3) -- (4,3) -- (4,4) -- (8,4) -- (8,5) -- (12,5) -- (12,8) -- (15,8) -- (15,20);
+            
+            % % Add labels
+            \node[font=\tiny,below left] at (0,0) {$0$};
+            \foreach \x in {5,10,15} {
+              \node[font=\tiny,below] at (\x,0) {$\x00$};
+            }
+            \foreach \y in {5,10,15} {
+              \node[font=\tiny,left] at (0,\y) {$\y$};
+            }
+        \end{tikzpicture}
+        \subcaption{\tiny Block 3 \\ (T9 - T12)}
+    \end{subfigure}%
+    \begin{subfigure}{.2\linewidth}
+        \centering
+        \begin{tikzpicture}[scale=.13]
+            % create grid
+            \draw[help lines] (0,0) grid (18,20);
+            
+            % Draw axes
+            \draw[->] (-1,0) -- (18,0) node[font=\tiny,right] {$Q$};
+            \draw[->] (0,-1) -- (0,20) node[font=\tiny,above] {$P$};
+          
+            % Draw step functions
+            \draw[blue, thick] (0,20) -- (0,17) -- (4,17) -- (4,15) -- (8,15) -- (8,8) -- (12,8) -- (12,6) -- (16,6) -- (16,0);
+            \draw[red, thick] (0,0) -- (0,3) -- (3,3) -- (3,4) -- (6,4) -- (6,5) -- (10,5) -- (10,6) -- (14,6) -- (14,20);
+            
+            % % Add labels
+            \node[font=\tiny,below left] at (0,0) {$0$};
+            \foreach \x in {5,10,15} {
+              \node[font=\tiny,below] at (\x,0) {$\x00$};
+            }
+            \foreach \y in {5,10,15} {
+              \node[font=\tiny,left] at (0,\y) {$\y$};
+            }
+        \end{tikzpicture}
+        \subcaption{\tiny Block 4 \\ (T13 - T16)}
+    \end{subfigure}%
+    \begin{subfigure}{.2\linewidth}
+        \centering
+        \begin{tikzpicture}[scale=.13]
+            % create grid
+            \draw[help lines] (0,0) grid (18,20);
+            
+            % Draw axes
+            \draw[->] (-1,0) -- (18,0) node[font=\tiny,right] {$Q$};
+            \draw[->] (0,-1) -- (0,20) node[font=\tiny,above] {$P$};
+          
+            % Draw step functions
+            \draw[blue, thick] (0,20) -- (0,17) -- (6,17) -- (6,16) -- (9,16) -- (9,14) - - (13,14) -- (13,0) ;
+            \draw[red, thick] (0,0) -- (0,3) -- (4,3) -- (4,4) -- (8,4) -- (8,11) --  (11,11) -- (11,14) -- (15,14) -- (15,20);
+            
+            % % Add labels
+            \node[font=\tiny,below left] at (0,0) {$0$};
+            \foreach \x in {5,10,15} {
+              \node[font=\tiny,below] at (\x,0) {$\x00$};
+            }
+            \foreach \y in {5,10,15} {
+              \node[font=\tiny,left] at (0,\y) {$\y$};
+            }
+        \end{tikzpicture}
+        \subcaption{\tiny Block 5 \\ (T17 - T20)}
+    \end{subfigure}
+    \label{fig:contract}
+\end{figure}

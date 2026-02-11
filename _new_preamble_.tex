@@ -1,0 +1,114 @@
+%% Language and font encodings
+\usepackage[english]{babel}
+% \usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+
+
+%% Sets page size and margins
+% \usepackage[letterpaper,top=3cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+\usepackage[margin=1.3in]{geometry}
+
+
+%% Spacing
+\usepackage{setspace}
+% \doublespacing
+ \onehalfspacing % ASI ESTABA 
+
+%% Useful packages
+\usepackage{amsmath}
+\usepackage{amssymb}
+\let\Bbbk\relax
+\usepackage{newtxtext,newtxmath}
+\usepackage{adjustbox}
+\usepackage{graphicx}
+\usepackage{rotating}
+
+% \usepackage[colorinlistoftodos]{todonotes} activate for side notes
+
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\let\openbox\relax
+\usepackage{amsthm}
+\usepackage{lscape}
+\usepackage{thmtools}
+\usepackage{thm-restate}
+
+\usepackage{color,soul}
+\usepackage{xcolor}
+
+\usepackage{tikz}
+
+%% for tables
+\usepackage{booktabs}
+\usepackage{booktabs, caption}
+\usepackage{tabularx}
+\usepackage{array}
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
+\usepackage[flushleft]{threeparttable}
+\usepackage{multirow}
+\usepackage{siunitx}
+\usepackage{changepage}
+%\usepackage{pdflscape}
+% for placing figures
+\usepackage{float}
+\usepackage{placeins}
+\usepackage{rotating} % For rotating tables
+%\usepackage[nolists,tablesfirst]{endfloat}
+%\usepackage{caption,rotating}
+% citations
+\usepackage{natbib}
+% \bibliographystyle{abbrv}
+%\bibliographystyle{abbrvnat}
+\setcitestyle{authoryear,open={(},close={)}}
+% \setlength{\bibsep}{0.0pt}
+
+% \usepackage{bibspacing}
+% \setlength{\bibitemsep}{.2\baselineskip plus .05\baselineskip minus .05\baselineskip}
+
+% appendices
+\usepackage[toc,page]{appendix}
+
+% Custom definitions
+\def\bmath#1{\mbox{\boldmath$#1$}}
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\declaretheorem[name=Theorem,numberwithin=section]{theorem}
+\declaretheorem[name=Proposition,numberwithin=section]{proposition}
+\declaretheorem[name=Lemma,numberwithin=section]{lemma}
+\declaretheorem[name=Corollary,numberwithin=section]{corollary}
+\declaretheorem[name=Definition,numberwithin=section]{definition}
+\declaretheorem[name=Example,numberwithin=section]{example}
+
+
+\newtheorem{assumption}{Assumption}
+\newtheorem{property}{Property}
+
+%for highlighting
+\usepackage{soul}
+
+%for including pdfs
+\usepackage{pdfpages}
+
+% \usepackage{titling}
+
+% multiple footnotes
+% \usepackage[multiple]{footmisc}
+ 
+%  for cases in equations
+ \usepackage{mathtools}
+ 
+ % For comments
+
+\newcounter{marginparcounter}
+\newcommand{\paulapar}[1]{\stepcounter{marginparcounter}$^{(\roman{marginparcounter})}$\marginpar{\renewcommand{\baselinestretch}{0.8}\scriptsize$^{(\roman{marginparcounter})}$ PA: #1}}
+\newcommand{\martinpar}[1]{\stepcounter{marginparcounter}$^{(\roman{marginparcounter})}$\marginpar{\renewcommand{\baselinestretch}{0.8}\scriptsize$^{(\roman{marginparcounter})}$ MS: #1}}
+\newcommand{\kristianpar}[1]{\stepcounter{marginparcounter}$^{(\roman{marginparcounter})}$\marginpar{\renewcommand{\baselinestretch}{0.8}\scriptsize$^{(\roman{marginparcounter})}$ KLV: #1}}
+ 
+
+\usepackage{graphicx} % for \includegraphics
+\usepackage{subcaption} % for subfigure
+\usepackage{rotating} % for sidewaystable and sidewaysfigure
+
+%%%AEJ-Micro wants roman numerals for sections and capital letters for subsections
+%\renewcommand{\thesection}{\Roman{section}}
+\renewcommand\thesection{\Roman{section}}
+\renewcommand\thesubsection{\Alph{subsection}}
